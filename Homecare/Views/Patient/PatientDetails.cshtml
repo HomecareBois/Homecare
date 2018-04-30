@@ -1,0 +1,78 @@
+﻿@model Homecare.Models.ViewModels.PatientViewModel
+
+<h2>Patient Info</h2>
+
+<div>
+    <h4>PatientViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cpr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cpr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.roadname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.roadname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.zipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.zipCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phonenumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phonenumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.relativePhonenumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.relativePhonenumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Rediger", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Tilbage til liste", "PatientList")
+</p>

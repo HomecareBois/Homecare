@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Homecare.Models.DataModels.Patient>
+
+<h2>Patienter</h2>
+
+<p>
+    @Html.ActionLink("Opret Ny", "CreatePatient")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.patient_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cpr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.relative_phonenumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.patient_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cpr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.relative_phonenumber)
+        </td>
+        <td>
+            @Html.ActionLink("Rediger", "EditPatient", new { id=item.id_patient}) |
+            @Html.ActionLink("Info", "PatientDetails", new { id = item.id_patient }) |
+            @Html.ActionLink("Slet", "DeletePatient", new { id=item.id_patient })
+        </td>
+    </tr>
+}
+
+</table>

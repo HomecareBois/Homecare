@@ -1,0 +1,703 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HomecareDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="id_address" />
+          </Key>
+          <Property Name="id_address" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="road_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="fk_city_address" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Caretaker">
+          <Key>
+            <PropertyRef Name="id_caretaker" />
+          </Key>
+          <Property Name="id_caretaker" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="caretaker_name" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="fk_login_caretaker" Type="int" Nullable="false" />
+          <Property Name="fk_phone_caretaker" Type="int" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id_city" />
+          </Key>
+          <Property Name="id_city" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="city_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="zipcode" Type="varchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="id_login" />
+          </Key>
+          <Property Name="id_login" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="fk_user_rights_login" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Occupation">
+          <Key>
+            <PropertyRef Name="id_occupation" />
+          </Key>
+          <Property Name="id_occupation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="occupation_name" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="id_patient" />
+          </Key>
+          <Property Name="id_patient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_name" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="cpr" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="relative_phonenumber" Type="nchar" MaxLength="12" />
+          <Property Name="fk_address_patient" Type="int" Nullable="false" />
+          <Property Name="fk_phone_patient" Type="int" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="id_phone" />
+          </Key>
+          <Property Name="id_phone" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="id_route" />
+          </Key>
+          <Property Name="id_route" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="arrival" Type="time" Precision="7" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="fk_caretaker_route" Type="int" Nullable="false" />
+          <Property Name="fk_address_route" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="id_schedule" />
+          </Key>
+          <Property Name="id_schedule" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="schedule_start" Type="datetime" Nullable="false" />
+          <Property Name="schedule_end" Type="datetime" Nullable="false" />
+          <Property Name="fk_staff_schedule" Type="int" Nullable="false" />
+          <Property Name="fk_route_schedule" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="id_staff" />
+          </Key>
+          <Property Name="id_staff" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staff_name" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="fk_occupation_staff" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User_Rights">
+          <Key>
+            <PropertyRef Name="id_user_rights" />
+          </Key>
+          <Property Name="id_user_rights" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_rights_type" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Address_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id_city" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="fk_city_address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Caretaker_Login">
+          <End Role="Login" Type="Self.Login" Multiplicity="1" />
+          <End Role="Caretaker" Type="Self.Caretaker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="id_login" />
+            </Principal>
+            <Dependent Role="Caretaker">
+              <PropertyRef Name="fk_login_caretaker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_User_Rights">
+          <End Role="User_Rights" Type="Self.User_Rights" Multiplicity="1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Rights">
+              <PropertyRef Name="id_user_rights" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="fk_user_rights_login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="fk_address_patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Phone">
+          <End Role="Phone" Type="Self.Phone" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phone">
+              <PropertyRef Name="id_phone" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="fk_phone_patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="fk_address_route" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_Caretaker">
+          <End Role="Caretaker" Type="Self.Caretaker" Multiplicity="1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Caretaker">
+              <PropertyRef Name="id_caretaker" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="fk_caretaker_route" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Route">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="id_route" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="fk_route_schedule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Occupation">
+          <End Role="Occupation" Type="Self.Occupation" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Occupation">
+              <PropertyRef Name="id_occupation" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="fk_occupation_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HomecareDBModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Caretaker" EntityType="Self.Caretaker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Occupation" EntityType="Self.Occupation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phone" EntityType="Self.Phone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Route" EntityType="Self.Route" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Rights" EntityType="Self.User_Rights" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Caretaker_Login" Association="Self.FK_Caretaker_Login">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Caretaker" EntitySet="Caretaker" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_User_Rights" Association="Self.FK_Login_User_Rights">
+            <End Role="User_Rights" EntitySet="User_Rights" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Address" Association="Self.FK_Patient_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Phone" Association="Self.FK_Patient_Phone">
+            <End Role="Phone" EntitySet="Phone" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_Address" Association="Self.FK_Route_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_Caretaker" Association="Self.FK_Route_Caretaker">
+            <End Role="Caretaker" EntitySet="Caretaker" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Route" Association="Self.FK_Schedule_Route">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Occupation" Association="Self.FK_Staff_Occupation">
+            <End Role="Occupation" EntitySet="Occupation" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HomecareDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="id_address" />
+          </Key>
+          <Property Name="id_address" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="road_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_city_address" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Address_City" FromRole="Address" ToRole="City" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_Address" FromRole="Address" ToRole="Patient" />
+          <NavigationProperty Name="Routes" Relationship="Self.FK_Route_Address" FromRole="Address" ToRole="Route" />
+        </EntityType>
+        <EntityType Name="Caretaker">
+          <Key>
+            <PropertyRef Name="id_caretaker" />
+          </Key>
+          <Property Name="id_caretaker" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="caretaker_name" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_login_caretaker" Type="Int32" Nullable="false" />
+          <Property Name="fk_phone_caretaker" Type="Int32" />
+          <NavigationProperty Name="Login" Relationship="Self.FK_Caretaker_Login" FromRole="Caretaker" ToRole="Login" />
+          <NavigationProperty Name="Routes" Relationship="Self.FK_Route_Caretaker" FromRole="Caretaker" ToRole="Route" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id_city" />
+          </Key>
+          <Property Name="id_city" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="city_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="zipcode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_City" FromRole="City" ToRole="Address" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="id_login" />
+          </Key>
+          <Property Name="id_login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_user_rights_login" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Caretakers" Relationship="Self.FK_Caretaker_Login" FromRole="Login" ToRole="Caretaker" />
+          <NavigationProperty Name="User_Rights" Relationship="Self.FK_Login_User_Rights" FromRole="Login" ToRole="User_Rights" />
+        </EntityType>
+        <EntityType Name="Occupation">
+          <Key>
+            <PropertyRef Name="id_occupation" />
+          </Key>
+          <Property Name="id_occupation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="occupation_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Staffs" Relationship="Self.FK_Staff_Occupation" FromRole="Occupation" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="id_patient" />
+          </Key>
+          <Property Name="id_patient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_name" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cpr" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="relative_phonenumber" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="fk_address_patient" Type="Int32" Nullable="false" />
+          <Property Name="fk_phone_patient" Type="Int32" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Patient_Address" FromRole="Patient" ToRole="Address" />
+          <NavigationProperty Name="Phone" Relationship="Self.FK_Patient_Phone" FromRole="Patient" ToRole="Phone" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="id_phone" />
+          </Key>
+          <Property Name="id_phone" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="phone_number" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_Phone" FromRole="Phone" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="id_route" />
+          </Key>
+          <Property Name="id_route" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="arrival" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fk_caretaker_route" Type="Int32" Nullable="false" />
+          <Property Name="fk_address_route" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Route_Address" FromRole="Route" ToRole="Address" />
+          <NavigationProperty Name="Caretaker" Relationship="Self.FK_Route_Caretaker" FromRole="Route" ToRole="Caretaker" />
+          <NavigationProperty Name="Schedules" Relationship="Self.FK_Schedule_Route" FromRole="Route" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="id_schedule" />
+          </Key>
+          <Property Name="id_schedule" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="schedule_start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="schedule_end" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fk_staff_schedule" Type="Int32" Nullable="false" />
+          <Property Name="fk_route_schedule" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Route" Relationship="Self.FK_Schedule_Route" FromRole="Schedule" ToRole="Route" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="id_staff" />
+          </Key>
+          <Property Name="id_staff" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staff_name" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_occupation_staff" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Occupation" Relationship="Self.FK_Staff_Occupation" FromRole="Staff" ToRole="Occupation" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User_Rights">
+          <Key>
+            <PropertyRef Name="id_user_rights" />
+          </Key>
+          <Property Name="id_user_rights" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_rights_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Logins" Relationship="Self.FK_Login_User_Rights" FromRole="User_Rights" ToRole="Login" />
+        </EntityType>
+        <Association Name="FK_Address_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id_city" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="fk_city_address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="fk_address_patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="fk_address_route" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Caretaker_Login">
+          <End Role="Login" Type="Self.Login" Multiplicity="1" />
+          <End Role="Caretaker" Type="Self.Caretaker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="id_login" />
+            </Principal>
+            <Dependent Role="Caretaker">
+              <PropertyRef Name="fk_login_caretaker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_Caretaker">
+          <End Role="Caretaker" Type="Self.Caretaker" Multiplicity="1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Caretaker">
+              <PropertyRef Name="id_caretaker" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="fk_caretaker_route" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_User_Rights">
+          <End Role="User_Rights" Type="Self.User_Rights" Multiplicity="1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Rights">
+              <PropertyRef Name="id_user_rights" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="fk_user_rights_login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Occupation">
+          <End Role="Occupation" Type="Self.Occupation" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Occupation">
+              <PropertyRef Name="id_occupation" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="fk_occupation_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Phone">
+          <End Role="Phone" Type="Self.Phone" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phone">
+              <PropertyRef Name="id_phone" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="fk_phone_patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Route">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="id_route" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="fk_route_schedule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HomecareDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Caretakers" EntityType="Self.Caretaker" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Logins" EntityType="Self.Login" />
+          <EntitySet Name="Occupations" EntityType="Self.Occupation" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="Phones" EntityType="Self.Phone" />
+          <EntitySet Name="Routes" EntityType="Self.Route" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedule" />
+          <EntitySet Name="Staffs" EntityType="Self.Staff" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="User_Rights" EntityType="Self.User_Rights" />
+          <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Address" Association="Self.FK_Patient_Address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Patient" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_Address" Association="Self.FK_Route_Address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Route" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Caretaker_Login" Association="Self.FK_Caretaker_Login">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="Caretaker" EntitySet="Caretakers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_Caretaker" Association="Self.FK_Route_Caretaker">
+            <End Role="Caretaker" EntitySet="Caretakers" />
+            <End Role="Route" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_User_Rights" Association="Self.FK_Login_User_Rights">
+            <End Role="User_Rights" EntitySet="User_Rights" />
+            <End Role="Login" EntitySet="Logins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Occupation" Association="Self.FK_Staff_Occupation">
+            <End Role="Occupation" EntitySet="Occupations" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Phone" Association="Self.FK_Patient_Phone">
+            <End Role="Phone" EntitySet="Phones" />
+            <End Role="Patient" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Route" Association="Self.FK_Schedule_Route">
+            <End Role="Route" EntitySet="Routes" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HomecareDBModelStoreContainer" CdmEntityContainer="HomecareDBEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="HomecareDBModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="id_address" ColumnName="id_address" />
+                <ScalarProperty Name="road_name" ColumnName="road_name" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="fk_city_address" ColumnName="fk_city_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Caretakers">
+            <EntityTypeMapping TypeName="HomecareDBModel.Caretaker">
+              <MappingFragment StoreEntitySet="Caretaker">
+                <ScalarProperty Name="id_caretaker" ColumnName="id_caretaker" />
+                <ScalarProperty Name="caretaker_name" ColumnName="caretaker_name" />
+                <ScalarProperty Name="fk_login_caretaker" ColumnName="fk_login_caretaker" />
+                <ScalarProperty Name="fk_phone_caretaker" ColumnName="fk_phone_caretaker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="HomecareDBModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="id_city" ColumnName="id_city" />
+                <ScalarProperty Name="city_name" ColumnName="city_name" />
+                <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="HomecareDBModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="id_login" ColumnName="id_login" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="fk_user_rights_login" ColumnName="fk_user_rights_login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Occupations">
+            <EntityTypeMapping TypeName="HomecareDBModel.Occupation">
+              <MappingFragment StoreEntitySet="Occupation">
+                <ScalarProperty Name="id_occupation" ColumnName="id_occupation" />
+                <ScalarProperty Name="occupation_name" ColumnName="occupation_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="HomecareDBModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="id_patient" ColumnName="id_patient" />
+                <ScalarProperty Name="patient_name" ColumnName="patient_name" />
+                <ScalarProperty Name="cpr" ColumnName="cpr" />
+                <ScalarProperty Name="relative_phonenumber" ColumnName="relative_phonenumber" />
+                <ScalarProperty Name="fk_address_patient" ColumnName="fk_address_patient" />
+                <ScalarProperty Name="fk_phone_patient" ColumnName="fk_phone_patient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phones">
+            <EntityTypeMapping TypeName="HomecareDBModel.Phone">
+              <MappingFragment StoreEntitySet="Phone">
+                <ScalarProperty Name="id_phone" ColumnName="id_phone" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Routes">
+            <EntityTypeMapping TypeName="HomecareDBModel.Route">
+              <MappingFragment StoreEntitySet="Route">
+                <ScalarProperty Name="id_route" ColumnName="id_route" />
+                <ScalarProperty Name="arrival" ColumnName="arrival" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="fk_caretaker_route" ColumnName="fk_caretaker_route" />
+                <ScalarProperty Name="fk_address_route" ColumnName="fk_address_route" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="HomecareDBModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="id_schedule" ColumnName="id_schedule" />
+                <ScalarProperty Name="schedule_start" ColumnName="schedule_start" />
+                <ScalarProperty Name="schedule_end" ColumnName="schedule_end" />
+                <ScalarProperty Name="fk_staff_schedule" ColumnName="fk_staff_schedule" />
+                <ScalarProperty Name="fk_route_schedule" ColumnName="fk_route_schedule" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="HomecareDBModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="id_staff" ColumnName="id_staff" />
+                <ScalarProperty Name="staff_name" ColumnName="staff_name" />
+                <ScalarProperty Name="fk_occupation_staff" ColumnName="fk_occupation_staff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HomecareDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Rights">
+            <EntityTypeMapping TypeName="HomecareDBModel.User_Rights">
+              <MappingFragment StoreEntitySet="User_Rights">
+                <ScalarProperty Name="id_user_rights" ColumnName="id_user_rights" />
+                <ScalarProperty Name="user_rights_type" ColumnName="user_rights_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
