@@ -208,9 +208,11 @@
     <Compile Include="Models\DataModels\Caretaker.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\CaretakerView.cs" />
     <Compile Include="Models\DataModels\City.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\database_firewall_rules.cs" />
     <Compile Include="Models\DataModels\HomecareDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -235,12 +237,14 @@
     <Compile Include="Models\DataModels\Patient.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\PatientView.cs" />
     <Compile Include="Models\DataModels\Phone.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Route.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\RouteView.cs" />
     <Compile Include="Models\DataModels\Schedule.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
