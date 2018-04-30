@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HomecareDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HomecareDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="id_address" />
@@ -109,6 +109,77 @@
           </Key>
           <Property Name="id_user_rights" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="user_rights_type" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HomecareDB.dbo.CaretakerView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CaretakerView">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="phone_number" />
+            <PropertyRef Name="caretaker_name" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="caretaker_name" Type="varchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HomecareDB.dbo.PatientView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PatientView">
+          <Key>
+            <PropertyRef Name="patient_name" />
+            <PropertyRef Name="road_name" />
+            <PropertyRef Name="number" />
+            <PropertyRef Name="phone_number" />
+            <PropertyRef Name="city_name" />
+            <PropertyRef Name="zipcode" />
+            <PropertyRef Name="cpr" />
+          </Key>
+          <Property Name="patient_name" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="road_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="city_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="zipcode" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="cpr" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="relative_phonenumber" Type="nchar" MaxLength="12" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HomecareDB.dbo.RouteView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RouteView">
+          <Key>
+            <PropertyRef Name="arrival" />
+            <PropertyRef Name="caretaker_name" />
+            <PropertyRef Name="road_name" />
+            <PropertyRef Name="number" />
+            <PropertyRef Name="city_name" />
+            <PropertyRef Name="zipcode" />
+            <PropertyRef Name="patient_name" />
+          </Key>
+          <Property Name="arrival" Type="time" Precision="7" Nullable="false" />
+          <Property Name="caretaker_name" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="road_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="city_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="zipcode" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="patient_name" Type="varchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Address_City">
           <End Role="City" Type="Self.City" Multiplicity="1" />
@@ -231,6 +302,46 @@
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Rights" EntityType="Self.User_Rights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CaretakerView" EntityType="Self.CaretakerView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CaretakerView].[username] AS [username], 
+    [CaretakerView].[phone_number] AS [phone_number], 
+    [CaretakerView].[caretaker_name] AS [caretaker_name]
+    FROM [dbo].[CaretakerView] AS [CaretakerView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PatientView" EntityType="Self.PatientView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PatientView].[patient_name] AS [patient_name], 
+    [PatientView].[road_name] AS [road_name], 
+    [PatientView].[number] AS [number], 
+    [PatientView].[phone_number] AS [phone_number], 
+    [PatientView].[city_name] AS [city_name], 
+    [PatientView].[zipcode] AS [zipcode], 
+    [PatientView].[cpr] AS [cpr], 
+    [PatientView].[relative_phonenumber] AS [relative_phonenumber]
+    FROM [dbo].[PatientView] AS [PatientView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RouteView" EntityType="Self.RouteView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RouteView].[arrival] AS [arrival], 
+    [RouteView].[caretaker_name] AS [caretaker_name], 
+    [RouteView].[road_name] AS [road_name], 
+    [RouteView].[number] AS [number], 
+    [RouteView].[city_name] AS [city_name], 
+    [RouteView].[zipcode] AS [zipcode], 
+    [RouteView].[patient_name] AS [patient_name]
+    FROM [dbo].[RouteView] AS [RouteView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Address_City" Association="Self.FK_Address_City">
             <End Role="City" EntitySet="City" />
             <End Role="Address" EntitySet="Address" />
@@ -268,8 +379,7 @@
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HomecareDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -553,7 +663,74 @@
             <End Role="Route" EntitySet="Routes" />
             <End Role="Schedule" EntitySet="Schedules" />
           </AssociationSet>
+          <EntitySet Name="CaretakerViews" EntityType="HomecareDBModel.CaretakerView" />
+          <EntitySet Name="PatientViews" EntityType="HomecareDBModel.PatientView" />
+          <EntitySet Name="RouteViews" EntityType="HomecareDBModel.RouteView" />
+          <EntitySet Name="database_firewall_rules" EntityType="HomecareDBModel.database_firewall_rules" />
         </EntityContainer>
+        <EntityType Name="CaretakerView">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="phone_number" />
+            <PropertyRef Name="caretaker_name" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="phone_number" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="caretaker_name" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PatientView">
+          <Key>
+            <PropertyRef Name="patient_name" />
+            <PropertyRef Name="road_name" />
+            <PropertyRef Name="number" />
+            <PropertyRef Name="phone_number" />
+            <PropertyRef Name="city_name" />
+            <PropertyRef Name="zipcode" />
+            <PropertyRef Name="cpr" />
+          </Key>
+          <Property Name="patient_name" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="road_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="phone_number" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="city_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zipcode" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="cpr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="relative_phonenumber" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RouteView">
+          <Key>
+            <PropertyRef Name="arrival" />
+            <PropertyRef Name="caretaker_name" />
+            <PropertyRef Name="road_name" />
+            <PropertyRef Name="number" />
+            <PropertyRef Name="city_name" />
+            <PropertyRef Name="zipcode" />
+            <PropertyRef Name="patient_name" />
+          </Key>
+          <Property Name="arrival" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="caretaker_name" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="road_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="number" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="city_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zipcode" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="patient_name" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -674,6 +851,54 @@
               <MappingFragment StoreEntitySet="User_Rights">
                 <ScalarProperty Name="id_user_rights" ColumnName="id_user_rights" />
                 <ScalarProperty Name="user_rights_type" ColumnName="user_rights_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CaretakerViews">
+            <EntityTypeMapping TypeName="HomecareDBModel.CaretakerView">
+              <MappingFragment StoreEntitySet="CaretakerView">
+                <ScalarProperty Name="caretaker_name" ColumnName="caretaker_name" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientViews">
+            <EntityTypeMapping TypeName="HomecareDBModel.PatientView">
+              <MappingFragment StoreEntitySet="PatientView">
+                <ScalarProperty Name="relative_phonenumber" ColumnName="relative_phonenumber" />
+                <ScalarProperty Name="cpr" ColumnName="cpr" />
+                <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+                <ScalarProperty Name="city_name" ColumnName="city_name" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="road_name" ColumnName="road_name" />
+                <ScalarProperty Name="patient_name" ColumnName="patient_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RouteViews">
+            <EntityTypeMapping TypeName="HomecareDBModel.RouteView">
+              <MappingFragment StoreEntitySet="RouteView">
+                <ScalarProperty Name="patient_name" ColumnName="patient_name" />
+                <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+                <ScalarProperty Name="city_name" ColumnName="city_name" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="road_name" ColumnName="road_name" />
+                <ScalarProperty Name="caretaker_name" ColumnName="caretaker_name" />
+                <ScalarProperty Name="arrival" ColumnName="arrival" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="HomecareDBModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

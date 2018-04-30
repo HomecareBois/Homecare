@@ -26,6 +26,10 @@
         <AssociationConnector Association="HomecareDBModel.FK_Staff_Occupation" ManuallyRouted="false" />
         <AssociationConnector Association="HomecareDBModel.FK_Patient_Phone" ManuallyRouted="false" />
         <AssociationConnector Association="HomecareDBModel.FK_Schedule_Route" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HomecareDBModel.CaretakerView" Width="1.5" PointX="3.5" PointY="10.5" />
+        <EntityTypeShape EntityType="HomecareDBModel.PatientView" Width="1.5" PointX="10.5" PointY="4.5" />
+        <EntityTypeShape EntityType="HomecareDBModel.RouteView" Width="1.5" PointX="0.5" PointY="11.5" />
+        <EntityTypeShape EntityType="HomecareDBModel.database_firewall_rules" Width="1.5" PointX="5.5" PointY="11.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

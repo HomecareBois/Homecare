@@ -76,11 +76,18 @@ namespace Homecare.Controllers
             return View();
         }
 
-        public ActionResult PatientList ()
+        /*public ActionResult PatientList ()
         {
             using (HomecareDBEntities db = new HomecareDBEntities())
             {
                 return View(db.Patients.ToList());
+            }
+        }*/
+        public ActionResult PatientView()
+        {
+            using (HomecareDBEntities db = new HomecareDBEntities())
+            {
+                return View(db.PatientViews.ToList());
             }
         }
 
