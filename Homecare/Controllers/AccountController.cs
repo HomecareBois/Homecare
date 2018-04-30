@@ -12,7 +12,6 @@ using Homecare.Models;
 
 namespace Homecare.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

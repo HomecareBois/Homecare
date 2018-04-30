@@ -10,7 +10,7 @@ using Homecare.Models;
 
 namespace Homecare.Controllers
 {
-    [Authorize]
+   
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
