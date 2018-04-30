@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -10,7 +11,6 @@ using Homecare.Models.ViewModels;
 
 namespace Homecare.Controllers
 {
-    [Authorize]
     public class PatientController : Controller
     {
         public ActionResult CreatePatient()
@@ -118,6 +118,7 @@ namespace Homecare.Controllers
 
         public ActionResult EditPatient (int? id)
         {
+            Debug.WriteLine("Test: " + id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -152,11 +153,31 @@ namespace Homecare.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPatient (PatientViewModel pvm)
+        public ActionResult EditPatient (PatientViewModel pvm, int? id)
         {
+
             if (ModelState.IsValid)
             {
                 HomecareDBEntities db = new HomecareDBEntities();
+
+                Patient patient = db.Patients.Find(id);
+
+                Phone phone = db.Phones.Find(patient.fk_phone_patient);
+                Address address = db.Addresses.Find(patient.fk_address_patient);
+                City city = db.Cities.Find(address.fk_city_address);
+
+                phone.phone_number = pvm.phonenumber;
+
+                city.city_name = pvm.cityName;
+                city.zipcode = pvm.zipCode;
+
+                address.road_name = pvm.roadname;
+                address.number = pvm.number;
+
+                patient.patient_name = pvm.name;
+                patient.cpr = pvm.cpr;
+                patient.relative_phonenumber = pvm.relativePhonenumber;
+
                 db.SaveChanges();
 
                 return RedirectToAction("PatientList");
