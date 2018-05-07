@@ -133,6 +133,7 @@ warning 6002: The table/view 'HomecareDB.dbo.PatientView' does not have a primar
             <PropertyRef Name="city_name" />
             <PropertyRef Name="zipcode" />
             <PropertyRef Name="cpr" />
+            <PropertyRef Name="id_patient" />
           </Key>
           <Property Name="patient_name" Type="varchar" MaxLength="70" Nullable="false" />
           <Property Name="road_name" Type="varchar" MaxLength="30" Nullable="false" />
@@ -142,6 +143,7 @@ warning 6002: The table/view 'HomecareDB.dbo.PatientView' does not have a primar
           <Property Name="zipcode" Type="varchar" MaxLength="4" Nullable="false" />
           <Property Name="cpr" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="relative_phonenumber" Type="nchar" MaxLength="12" />
+          <Property Name="id_patient" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'HomecareDB.dbo.RouteView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -318,7 +320,8 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
     [PatientView].[city_name] AS [city_name], 
     [PatientView].[zipcode] AS [zipcode], 
     [PatientView].[cpr] AS [cpr], 
-    [PatientView].[relative_phonenumber] AS [relative_phonenumber]
+    [PatientView].[relative_phonenumber] AS [relative_phonenumber], 
+    [PatientView].[id_patient] AS [id_patient]
     FROM [dbo].[PatientView] AS [PatientView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="RouteView" EntityType="Self.RouteView" store:Type="Views" store:Schema="dbo">
@@ -687,6 +690,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             <PropertyRef Name="city_name" />
             <PropertyRef Name="zipcode" />
             <PropertyRef Name="cpr" />
+            <PropertyRef Name="id_patient" />
           </Key>
           <Property Name="patient_name" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
           <Property Name="road_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
@@ -696,6 +700,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <Property Name="zipcode" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="cpr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="relative_phonenumber" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="id_patient" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="RouteView">
           <Key>
@@ -866,6 +871,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <EntitySetMapping Name="PatientViews">
             <EntityTypeMapping TypeName="HomecareDBModel.PatientView">
               <MappingFragment StoreEntitySet="PatientView">
+                <ScalarProperty Name="id_patient" ColumnName="id_patient" />
                 <ScalarProperty Name="relative_phonenumber" ColumnName="relative_phonenumber" />
                 <ScalarProperty Name="cpr" ColumnName="cpr" />
                 <ScalarProperty Name="zipcode" ColumnName="zipcode" />

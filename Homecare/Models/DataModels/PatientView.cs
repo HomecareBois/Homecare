@@ -22,5 +22,6 @@ namespace Homecare.Models.DataModels
         public string zipcode { get; set; }
         public string cpr { get; set; }
         public string relative_phonenumber { get; set; }
+        public int id_patient { get; set; }
     }
 }
