@@ -70,7 +70,7 @@ namespace Homecare.Controllers
                     db.Caretakers.Add(caretaker);
                     db.SaveChanges();
                 }
-                
+
 
                 ModelState.Clear();
                 ViewBag.Message = inputData.name + " was created";

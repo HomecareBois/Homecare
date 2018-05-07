@@ -339,7 +339,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Caretaker\CreateCaretaker.cshtml" />
     <Content Include="Views\Patient\CreatePatient.cshtml" />
     <Content Include="Views\Patient\DeletePatient.cshtml" />
     <Content Include="Views\Patient\EditPatient.cshtml" />
@@ -348,6 +347,7 @@
     <Content Include="Views\Route\CreateRoute.cshtml" />
     <Content Include="Views\Patient\PatientView.cshtml" />
     <Content Include="Views\Patient\PatientsList.cshtml" />
+    <Content Include="Views\Caretaker\CreateCaretaker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
