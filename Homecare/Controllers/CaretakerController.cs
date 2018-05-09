@@ -76,7 +76,7 @@ namespace Homecare.Controllers
                 ViewBag.Message = inputData.name + " was created";
             }
 
-            return View();
+            return RedirectToAction("Login", "Account");
         }
     }
 }

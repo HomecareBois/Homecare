@@ -13,6 +13,7 @@ namespace Homecare.Models.ViewModels
         public string name { get; set; }
 
         [Required]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string username { get; set; }
 
