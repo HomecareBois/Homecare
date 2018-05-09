@@ -29,8 +29,11 @@ namespace Homecare.Models.ViewModels
         [Display(Name = "Gentag kodeord")]
         public string confirmPassword { get; set; }
 
+        [Display(Name = "Brugerrettigheder")]
         [Required]
         public string user_rights { get; set; }
+        
+        [Display(Name = "Telefonnummer")]
         [Required]
         public string phonenumber { get; set; }
     }
