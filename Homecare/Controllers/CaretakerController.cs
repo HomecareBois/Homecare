@@ -71,12 +71,12 @@ namespace Homecare.Controllers
                     db.SaveChanges();
                 }
 
+                ViewBag.LoginMessage = inputData.name + " was created";
 
                 ModelState.Clear();
-                ViewBag.Message = inputData.name + " was created";
             }
 
-            return RedirectToAction("Login", "Account");
+            return View();
         }
     }
 }
