@@ -45,6 +45,14 @@ namespace Homecare.Controllers
 
         public ActionResult RoutesList()
         {
+
+            /*
+             * Lav en overordnet liste der viser ét navn pr dato den person har flere ruter.
+             * Sørg for den kun viser et navn pr dato og en dato pr navn
+             * Lav et link videre til en liste der viser samtlige ruter for den pågældende person på den dag.
+             * Formater tid så det kun er dato/måned/år eller time:minut. 
+             */
+
             HomecareDBEntities db = new HomecareDBEntities();
 
             List<RoutesListView> routes = new List<RoutesListView>();
