@@ -11,10 +11,10 @@ namespace Homecare.Models.ViewModels
     {
         [Required(ErrorMessage = "Vælg en hjemmehjælper")]
         [DisplayName("Hjemmehjælper")]
-        public string caretaker { get; set; }
+        public string caretaker { get; set; } 
 
         [Required(ErrorMessage = "")]
-        [DisplayName("Hjemmehjælper")]
+        [DisplayName("Dato")]
         public DateTime date { get; set; }
 
         public DateTime time { get; set; }
