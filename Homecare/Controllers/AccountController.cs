@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Homecare.Models;
+using Homecare.Models.DataModels;
 
 namespace Homecare.Controllers
 {
@@ -56,8 +57,17 @@ namespace Homecare.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            //ViewBag.ReturnUrl = returnUrl;
+            //return View();
+            if (Session["username"] != null)
+            {
+                return RedirectToAction("Index", "Home", new { username = Session["username"].ToString() });
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
         //
@@ -72,22 +82,46 @@ namespace Homecare.Controllers
                 return View(model);
             }
 
+            //db.Phones.FirstOrDefault(pi => pi.phone_number == inputData.phonenumber).id_phone;
+
+
+            using (HomecareDBEntities db = new HomecareDBEntities())
+            {
+                var userLogin = db.Logins.SingleOrDefault(x => x.username == model.Email && x.password == model.Password);
+
+                if (userLogin != null)
+                {
+                    Session["username"] = model.Email;
+
+                    return RedirectToAction("Index", "Home", new { username = model.Email });
+                }
+                else
+                {
+                    return View();
+                }
+            }
+
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+
+
+
+
+            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //switch (result)
+            //{
+            //    case SignInStatus.Success:
+            //        return RedirectToLocal(returnUrl);
+            //    case SignInStatus.LockedOut:
+            //        return View("Lockout");
+            //    case SignInStatus.RequiresVerification:
+            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            //    case SignInStatus.Failure:
+            //    default:
+            //        ModelState.AddModelError("", "Invalid login attempt.");
+            //        return View(model);
+            //}
         }
 
         //
