@@ -51,9 +51,6 @@ namespace Homecare.Controllers
         {
             HomecareDBEntities db = new HomecareDBEntities();
 
-            List<Route> routes = db.Routes.ToList();
-            Console.WriteLine(routes);
-
             return View(db.Routes.ToList());
         }
     }
