@@ -15,25 +15,10 @@
             @Html.DisplayNameFor(model => model.patient_name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.road_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.phone_number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.city_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.zipcode)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.cpr)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.relative_phonenumber)
+            @Html.DisplayNameFor(model => model.phone_number)
         </th>
         <th></th>
     </tr>
@@ -44,25 +29,10 @@
             @Html.DisplayFor(modelItem => item.patient_name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.road_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phone_number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.city_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.zipcode)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.cpr)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.relative_phonenumber)
+            @Html.DisplayFor(modelItem => item.phone_number)
         </td>
         <td>
             @Html.ActionLink("Rediger", "EditPatient", new { id = item.id_patient }) |
