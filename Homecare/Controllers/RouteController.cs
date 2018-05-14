@@ -19,39 +19,44 @@ namespace Homecare.Controllers
         [HttpPost]
         public ActionResult CreateRoute(RouteViewModel inputData)
         {
-            using (HomecareDBEntities db = new HomecareDBEntities())
+            if(ModelState.IsValid)
             {
-                var caretakerIdToDb = db.Caretakers
-                    .FirstOrDefault(ci => ci.caretaker_name == inputData.caretaker)
-                    .id_caretaker;
-
-                var addressIdToDb = db.Patients
-                    .FirstOrDefault(ai => ai.cpr == inputData.patientCpr).fk_address_patient;
-
-                var arrivalToDb = inputData.date.TimeOfDay;
-
-                var dateToDb = inputData.date.Date;
-
-                var route = new Route
+                using (HomecareDBEntities db = new HomecareDBEntities())
                 {
-                    arrival = arrivalToDb,
-                    date = dateToDb,
-                    fk_caretaker_route = caretakerIdToDb,
-                    fk_address_route = addressIdToDb
+                    var tidspunkt = inputData.time;
+                    var dato = inputData.date;
+                    var adresse = db.Patients.FirstOrDefault(pa => pa.patient_name == inputData.patientCpr).fk_address_patient;
+                    var caretaker = db.Caretakers.FirstOrDefault(ca => ca.caretaker_name == inputData.caretaker).id_caretaker;
 
-                };
-                db.Routes.Add(route);
-                db.SaveChanges();
-            };
-
+                    var route = new Route
+                    {
+                        arrival = tidspunkt,
+                        date = dato,
+                        fk_address_route = adresse,
+                        fk_caretaker_route = caretaker
+                    };
+                    db.Routes.Add(route);
+                    db.SaveChanges();
+                }
+            
+            }
             return View();
         }
 
-        public ActionResult RouteList()
+        public ActionResult RoutesList()
         {
             HomecareDBEntities db = new HomecareDBEntities();
 
-            return View(db.Routes.ToList());
+            List<RoutesListView> routes = new List<RoutesListView>();
+
+            foreach(var item in db.Routes)
+            {
+                var navn = db.Caretakers.FirstOrDefault(ca => ca.id_caretaker == item.fk_caretaker_route).caretaker_name;
+                routes.Add(new RoutesListView { name = navn, date = item.date });
+            }
+
+
+            return View(routes);
         }
     }
 }

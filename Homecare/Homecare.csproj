@@ -208,11 +208,15 @@
     <Compile Include="Models\DataModels\Caretaker.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataModels\CaretakerView.cs" />
+    <Compile Include="Models\DataModels\CaretakerView.cs">
+      <DependentUpon>HomecareDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataModels\City.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataModels\database_firewall_rules.cs" />
+    <Compile Include="Models\DataModels\database_firewall_rules.cs">
+      <DependentUpon>HomecareDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataModels\HomecareDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -237,14 +241,18 @@
     <Compile Include="Models\DataModels\Patient.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataModels\PatientView.cs" />
+    <Compile Include="Models\DataModels\PatientView.cs">
+      <DependentUpon>HomecareDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataModels\Phone.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Route.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataModels\RouteView.cs" />
+    <Compile Include="Models\DataModels\RouteView.cs">
+      <DependentUpon>HomecareDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataModels\Schedule.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
@@ -261,7 +269,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\CaretakerViewModel.cs" />
     <Compile Include="Models\ViewModels\PatientViewModel.cs" />
-    <Compile Include="Models\ViewModels\RoutesViewModel.cs" />
+    <Compile Include="Models\ViewModels\RoutesListView.cs" />
     <Compile Include="Models\ViewModels\RouteViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -348,8 +356,8 @@
     <Content Include="Views\Route\CreateRoute.cshtml" />
     <Content Include="Views\Patient\PatientView.cshtml" />
     <Content Include="Views\Patient\PatientsList.cshtml" />
-    <Content Include="Views\Route\RouteList.cshtml" />
     <Content Include="Views\Caretaker\CreateCaretaker.cshtml" />
+    <Content Include="Views\Route\RoutesList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

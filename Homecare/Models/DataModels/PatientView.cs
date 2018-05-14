@@ -11,31 +11,16 @@ namespace Homecare.Models.DataModels
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class PatientView
     {
-        [DisplayName ("Navn")]
         public string patient_name { get; set; }
-
-        [DisplayName("Gade")]
         public string road_name { get; set; }
-
-        [DisplayName("Hus nr.")]
         public string number { get; set; }
-
-        [DisplayName("Telefonnr")]
         public string phone_number { get; set; }
-
-        [DisplayName("By")]
         public string city_name { get; set; }
-
-        [DisplayName("Post nr.")]
         public string zipcode { get; set; }
-
-        [DisplayName("CPR-nummer")]
         public string cpr { get; set; }
-        [DisplayName("Telefonnr (Pårørende)")]
         public string relative_phonenumber { get; set; }
         public int id_patient { get; set; }
     }

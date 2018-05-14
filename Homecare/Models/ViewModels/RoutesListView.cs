@@ -5,10 +5,9 @@ using System.Web;
 
 namespace Homecare.Models.ViewModels
 {
-    public class RoutesViewModel
+    public class RoutesListView
     {
-
         public string name { get; set; }
-        public DateTime dato { get; set; }
+        public DateTime date { get; set; }
     }
 }
