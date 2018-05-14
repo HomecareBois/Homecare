@@ -55,9 +55,6 @@ namespace Homecare.Controllers
             Console.WriteLine(routes);
 
             return View(db.Routes.ToList());
-
-
-            Console.WriteLine("Juhu");
         }
     }
 }
