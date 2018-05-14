@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Homecare.Models.DataModels.Caretaker>
+
+@{
+    ViewBag.Title = "TestRoute";
+}
+
+<h2>TestRoute</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_caretaker)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.caretaker_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fk_login_caretaker)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fk_phone_caretaker)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_caretaker)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.caretaker_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fk_login_caretaker)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fk_phone_caretaker)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Homecare.Models.ViewModels.RouteCaretakerView>
+
+@{
+    ViewBag.Title = "AllRoutes";
+}
+
+<h2>AllRoutes</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.careModel.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.routeModel.caretaker)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.careModel.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.routeModel.caretaker)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

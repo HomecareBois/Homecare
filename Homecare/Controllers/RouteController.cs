@@ -47,9 +47,45 @@ namespace Homecare.Controllers
             return View();
         }
 
-        public ActionResult ViewRoute()
+        public ActionResult TestRoute(int? id)
         {
-            return View();
+            HomecareDBEntities db = new HomecareDBEntities();
+
+            var list = from c in db.Caretakers
+                       where c.caretaker_name.Equals("1")
+                       select c;
+
+            return View(list.ToList());
+        }
+
+        public ActionResult AllRoutes()
+        {
+            HomecareDBEntities db = new HomecareDBEntities();
+
+            //var routeList = from r in db.Routes
+            //                join c in db.Caretakers on r.fk_caretaker_route equals c.id_caretaker
+            //                where c.id_caretaker == 1
+            //                select r;
+
+            //var routeList = db.Database.SqlQuery<RouteCaretakerView>
+            //    ("SELECT dbo.Route.id_route, dbo.Caretaker.caretaker_name " +
+            //    "FROM Route  " +
+            //    "INNER JOIN Caretaker ON Route.fk_caretaker_route = dbo.Caretaker.id_caretaker").AsEnumerable();
+
+            //var routeList = db.Routes.ToList();
+            //foreach(Route r in routeList)
+            //{
+            //    db.Entry(r).Collection(
+            //}
+            //return View(routeList);
+        }
+
+        public ActionResult ViewRoute(int? id)
+        {
+            using (HomecareDBEntities db = new HomecareDBEntities())
+            {
+                return View(db.Routes.ToList());
+            }
         }
 
     }
