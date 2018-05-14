@@ -14,17 +14,18 @@
         .navbar {
             background-color: white;
             overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 0.05em solid rgba(0, 0, 0, 0.1);
             border-color: #009688;
             position: fixed;
             top: 0;
             width: 100%;
             border-right: 0;
             border-top: 0;
+            border-left: 0;
             border-radius: 0;
         }
 
-        a {
+        a{
             color: #009688;
         }
 
@@ -33,6 +34,34 @@
             color: #009688;
         }
 
+        img{
+            height: 45px;
+        }
+
+        select {
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .icon-bar {
+            background-color: #009688;
+        }
+
+        .btn:hover {
+            background-color: #009688;
+            color: #ffff;
+            opacity: 0.4;
+        }
+
+        .front-col {
+            border: 0.05em solid rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+        }
+
+        .front-row {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 
 </head>
@@ -40,7 +69,12 @@
     <div class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <div class="navbar-header">
-                <img src="../sources/logo.png" />
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/"><img src="../sources/logo.png" /></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -55,7 +89,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer >
             <p>&copy; @DateTime.Now.Year - Eksamensprojekt (Toke, Anders, Jonathan & Fredrik)</p>
         </footer>
     </div>
