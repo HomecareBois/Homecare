@@ -344,12 +344,11 @@
     <Content Include="Views\Patient\CreatePatient.cshtml" />
     <Content Include="Views\Patient\DeletePatient.cshtml" />
     <Content Include="Views\Patient\EditPatient.cshtml" />
-    <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\Patient\PatientDetails.cshtml" />
     <Content Include="Views\Patient\PatientList.cshtml" />
     <Content Include="Views\Route\CreateRoute.cshtml" />
-    <Content Include="Views\Route\TestRoute.cshtml" />
-    <Content Include="Views\Route\AllRoutes.cshtml" />
+    <Content Include="Views\Patient\PatientView.cshtml" />
+    <Content Include="Views\Patient\PatientsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

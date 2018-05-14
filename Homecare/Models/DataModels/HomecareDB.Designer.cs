@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\pesti\Documents\Datamatiker\4.semester\CSharp\Homecare\Homecare\Models\DataModels\HomecareDB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Fredrik\Documents\Studie\4. Semester\C# - .NET\homecarev4\Homecare\Homecare\Models\DataModels\HomecareDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
