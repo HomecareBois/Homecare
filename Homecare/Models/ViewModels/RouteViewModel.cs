@@ -23,7 +23,7 @@ namespace Homecare.Models.ViewModels
         [DisplayName("Tid")]
         [DataType(DataType.Time)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh.mm")]
-        public DateTime time { get; set; }
+        public TimeSpan time { get; set; }
 
         [Required]
         [DisplayName("CPR-nummer")]

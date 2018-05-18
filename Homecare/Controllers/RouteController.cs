@@ -38,6 +38,7 @@ namespace Homecare.Controllers
                     db.Routes.Add(route);
                     db.SaveChanges();
                 }
+                ModelState.Clear();
             
             }
             return View();
@@ -52,19 +53,30 @@ namespace Homecare.Controllers
              * Lav et link videre til en liste der viser samtlige ruter for den pågældende person på den dag.
              * Formater tid så det kun er dato/måned/år eller time:minut. 
              */
-
-            HomecareDBEntities db = new HomecareDBEntities();
-
-            List<RoutesListView> routes = new List<RoutesListView>();
-
-            foreach(var item in db.Routes)
+            using (HomecareDBEntities db = new HomecareDBEntities())
             {
-                var navn = db.Caretakers.FirstOrDefault(ca => ca.id_caretaker == item.fk_caretaker_route).caretaker_name;
-                routes.Add(new RoutesListView { name = navn, date = item.date });
+
+
+                List<RoutesListView> routes = new List<RoutesListView>();
+
+                foreach (var item in db.Routes)
+                {
+                    var navn = (db.Caretakers.FirstOrDefault(ca => ca.id_caretaker == item.fk_caretaker_route).caretaker_name);
+                    routes.Add(new RoutesListView { name = navn, date = item.date });
+                }
+
+                //foreach (var item in db.Caretakers)
+                //{
+                //    DateTime dato = db.Routes.First(r => r.fk_caretaker_route == item.id_caretaker).date;
+                //    routes.Add(new RoutesListView { name = item.caretaker_name, date = dato });
+                //}
+
+                //IEnumerable<Route> liste = from r in db.Routes.GroupBy(r => r.date).Select(r => r.FirstOrDefault());
+
+                //IEnumerable<Route> liste = db.Routes.GroupBy(r => r.date).Select(p => p.First());
+                return View(routes);
             }
-
-
-            return View(routes);
+            
         }
     }
 }

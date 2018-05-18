@@ -28,6 +28,8 @@
         <EntityTypeShape EntityType="HomecareDBModel.database_firewall_rules" Width="1.5" PointX="5.5" PointY="11.5" />
         <EntityTypeShape EntityType="HomecareDBModel.Route" Width="1.5" PointX="7.5" PointY="1.125" />
         <AssociationConnector Association="HomecareDBModel.FK_Schedule_Route" />
+        <AssociationConnector Association="HomecareDBModel.FK_Route_Address" />
+        <AssociationConnector Association="HomecareDBModel.FK_Route_Caretaker" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

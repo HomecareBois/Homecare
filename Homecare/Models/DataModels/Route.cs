@@ -21,12 +21,14 @@ namespace Homecare.Models.DataModels
         }
     
         public int id_route { get; set; }
-        public System.DateTime arrival { get; set; }
+        public System.TimeSpan arrival { get; set; }
         public System.DateTime date { get; set; }
         public int fk_caretaker_route { get; set; }
         public int fk_address_route { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Schedule> Schedules { get; set; }
+        public virtual Address Address { get; set; }
+        public virtual Caretaker Caretaker { get; set; }
     }
 }

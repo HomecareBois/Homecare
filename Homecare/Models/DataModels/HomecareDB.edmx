@@ -70,7 +70,7 @@
             <PropertyRef Name="id_route" />
           </Key>
           <Property Name="id_route" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="arrival" Type="datetime" Nullable="false" />
+          <Property Name="arrival" Type="time" Precision="0" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="fk_caretaker_route" Type="int" Nullable="false" />
           <Property Name="fk_address_route" Type="int" Nullable="false" />
@@ -243,6 +243,30 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Route_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="fk_address_route" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_Caretaker">
+          <End Role="Caretaker" Type="Self.Caretaker" Multiplicity="1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Caretaker">
+              <PropertyRef Name="id_caretaker" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="fk_caretaker_route" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Schedule_Route">
           <End Role="Route" Type="Self.Route" Multiplicity="1" />
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
@@ -341,6 +365,14 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             <End Role="Phone" EntitySet="Phone" />
             <End Role="Patient" EntitySet="Patient" />
           </AssociationSet>
+          <AssociationSet Name="FK_Route_Address" Association="Self.FK_Route_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_Caretaker" Association="Self.FK_Route_Caretaker">
+            <End Role="Caretaker" EntitySet="Caretaker" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
           <AssociationSet Name="FK_Schedule_Route" Association="Self.FK_Schedule_Route">
             <End Role="Route" EntitySet="Route" />
             <End Role="Schedule" EntitySet="Schedule" />
@@ -364,6 +396,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <Property Name="fk_city_address" Type="Int32" Nullable="false" />
           <NavigationProperty Name="City" Relationship="Self.FK_Address_City" FromRole="Address" ToRole="City" />
           <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_Address" FromRole="Address" ToRole="Patient" />
+          <NavigationProperty Name="Routes" Relationship="HomecareDBModel.FK_Route_Address" FromRole="Address" ToRole="Route" />
         </EntityType>
         <EntityType Name="Caretaker">
           <Key>
@@ -374,6 +407,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <Property Name="fk_login_caretaker" Type="Int32" Nullable="false" />
           <Property Name="fk_phone_caretaker" Type="Int32" />
           <NavigationProperty Name="Login" Relationship="Self.FK_Caretaker_Login" FromRole="Caretaker" ToRole="Login" />
+          <NavigationProperty Name="Routes" Relationship="HomecareDBModel.FK_Route_Caretaker" FromRole="Caretaker" ToRole="Route" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -579,6 +613,14 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             <End Role="Route" EntitySet="Routes" />
             <End Role="Schedule" EntitySet="Schedules" />
           </AssociationSet>
+          <AssociationSet Name="FK_Route_Address" Association="HomecareDBModel.FK_Route_Address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Route" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_Caretaker" Association="HomecareDBModel.FK_Route_Caretaker">
+            <End Role="Caretaker" EntitySet="Caretakers" />
+            <End Role="Route" EntitySet="Routes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CaretakerView">
           <Key>
@@ -650,11 +692,13 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             <PropertyRef Name="id_route" />
           </Key>
           <Property Name="id_route" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="arrival" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="arrival" Type="Time" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="fk_caretaker_route" Type="Int32" Nullable="false" />
           <Property Name="fk_address_route" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Schedules" Relationship="HomecareDBModel.FK_Schedule_Route" FromRole="Route" ToRole="Schedule" />
+          <NavigationProperty Name="Address" Relationship="HomecareDBModel.FK_Route_Address" FromRole="Route" ToRole="Address" />
+          <NavigationProperty Name="Caretaker" Relationship="HomecareDBModel.FK_Route_Caretaker" FromRole="Route" ToRole="Caretaker" />
         </EntityType>
         <Association Name="FK_Schedule_Route">
           <End Type="HomecareDBModel.Route" Role="Route" Multiplicity="1" />
@@ -665,6 +709,30 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             </Principal>
             <Dependent Role="Schedule">
               <PropertyRef Name="fk_route_schedule" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_Address">
+          <End Type="HomecareDBModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="HomecareDBModel.Route" Role="Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="id_address" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="fk_address_route" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_Caretaker">
+          <End Type="HomecareDBModel.Caretaker" Role="Caretaker" Multiplicity="1" />
+          <End Type="HomecareDBModel.Route" Role="Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Caretaker">
+              <PropertyRef Name="id_caretaker" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="fk_caretaker_route" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
