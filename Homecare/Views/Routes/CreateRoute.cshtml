@@ -1,10 +1,10 @@
 ﻿@model Homecare.Models.ViewModels.RouteViewModel
 
 @{
-    ViewBag.Title = "CreateRoute";
+    ViewBag.Title = "Opret rute";
 }
 
-<h2>CreateRoute</h2>
+<h2>Opret ny rute</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,14 +12,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>RouteViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.caretaker, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @{
-                    Homecare.Models.DataModels.HomecareDBEntities db = new Homecare.Models.DataModels.HomecareDBEntities();
+                    Homecare.Models.DataModels.HomecareTestDB db = new Homecare.Models.DataModels.HomecareTestDB();
                     List<SelectListItem> caretakers = new List<SelectListItem>();
                     foreach(var item in db.Caretakers)
                     {
@@ -64,14 +63,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Opret" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Tilbage", "Index")
 </div>
 
 @section Scripts {

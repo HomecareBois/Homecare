@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Homecare.Models.ViewModels.RoutesListView>
+
+@{
+    ViewBag.Title = "Ruter";
+}
+
+<h2>Ruter</h2>
+
+<p>
+    @Html.ActionLink("Opret ny", "CreateRoute")
+</p>
+
+<h1>
+    (punkt er patient(m adresse))
+    Tilføj view til "tilføj punkter" så man kan tilføje adresse og tidspunkt
+    Details skal vise alle routes for den hjemmehjælper.
+    Delete skal slette den route + alle tilhørende "punkter"
+</h1>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Caretaker.caretaker_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Caretaker.caretaker_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.ActionLink("Tilføj punkter", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+

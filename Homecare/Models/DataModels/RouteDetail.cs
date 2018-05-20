@@ -12,24 +12,22 @@ namespace Homecare.Models.DataModels
     using System;
     using System.Collections.Generic;
     
-    public partial class Address
+    public partial class RouteDetail
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Address()
+        public RouteDetail()
         {
-            this.Patients = new HashSet<Patient>();
-            this.RouteDetails = new HashSet<RouteDetail>();
+            this.Schedules = new HashSet<Schedule>();
         }
     
-        public int id_address { get; set; }
-        public string road_name { get; set; }
-        public string number { get; set; }
-        public int fk_city_address { get; set; }
+        public int id_routedetails { get; set; }
+        public System.TimeSpan arrival { get; set; }
+        public int fk_address_route { get; set; }
+        public int fk_route_routedetails { get; set; }
     
-        public virtual City City { get; set; }
+        public virtual Address Address { get; set; }
+        public virtual Route Route { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Patient> Patients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RouteDetail> RouteDetails { get; set; }
+        public virtual ICollection<Schedule> Schedules { get; set; }
     }
 }

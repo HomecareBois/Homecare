@@ -197,22 +197,22 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
-    <Compile Include="Controllers\RouteController.cs" />
+    <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DataModels\Address.cs">
-      <DependentUpon>HomecareDB.tt</DependentUpon>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Caretaker.cs">
-      <DependentUpon>HomecareDB.tt</DependentUpon>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\CaretakerView.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\City.cs">
-      <DependentUpon>HomecareDB.tt</DependentUpon>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\database_firewall_rules.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
@@ -232,38 +232,56 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HomecareDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\HomecareTestDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomecareTestDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModels\HomecareTestDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModels\HomecareTestDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomecareTestDB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataModels\Login.cs">
-      <DependentUpon>HomecareDB.tt</DependentUpon>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Occupation.cs">
-      <DependentUpon>HomecareDB.tt</DependentUpon>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Patient.cs">
-      <DependentUpon>HomecareDB.tt</DependentUpon>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\PatientView.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Phone.cs">
-      <DependentUpon>HomecareDB.tt</DependentUpon>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Route.cs">
-      <DependentUpon>HomecareDB.tt</DependentUpon>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModels\RouteDetail.cs">
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\RouteView.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Schedule.cs">
-      <DependentUpon>HomecareDB.tt</DependentUpon>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Staff.cs">
-      <DependentUpon>HomecareDB.tt</DependentUpon>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\sysdiagram.cs">
-      <DependentUpon>HomecareDB.tt</DependentUpon>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\User_Rights.cs">
-      <DependentUpon>HomecareDB.tt</DependentUpon>
+      <DependentUpon>HomecareTestDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -291,6 +309,16 @@
       <DependentUpon>HomecareDB.edmx</DependentUpon>
       <LastGenOutput>HomecareDB.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\DataModels\HomecareTestDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HomecareTestDB.edmx</DependentUpon>
+      <LastGenOutput>HomecareTestDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DataModels\HomecareTestDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HomecareTestDB.edmx</DependentUpon>
+      <LastGenOutput>HomecareTestDB.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -302,6 +330,13 @@
     </EntityDeploy>
     <Content Include="Models\DataModels\HomecareDB.edmx.diagram">
       <DependentUpon>HomecareDB.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DataModels\HomecareTestDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HomecareTestDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DataModels\HomecareTestDB.edmx.diagram">
+      <DependentUpon>HomecareTestDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -353,14 +388,16 @@
     <Content Include="Views\Patient\EditPatient.cshtml" />
     <Content Include="Views\Patient\PatientDetails.cshtml" />
     <Content Include="Views\Patient\PatientList.cshtml" />
-    <Content Include="Views\Route\CreateRoute.cshtml" />
+    <Content Include="Views\Routes\CreateRoute.cshtml" />
     <Content Include="Views\Patient\PatientView.cshtml" />
     <Content Include="Views\Patient\PatientsList.cshtml" />
     <Content Include="Views\Caretaker\CreateCaretaker.cshtml" />
-    <Content Include="Views\Route\RoutesList.cshtml" />
+    <Content Include="Views\Routes\Index.cshtml" />
+    <Content Include="Views\Routes\CreateRouteTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\RouteDetails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
