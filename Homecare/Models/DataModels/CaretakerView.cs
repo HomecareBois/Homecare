@@ -14,8 +14,9 @@ namespace Homecare.Models.DataModels
     
     public partial class CaretakerView
     {
-        public string username { get; set; }
-        public string phone_number { get; set; }
         public string caretaker_name { get; set; }
+        public int id_caretaker { get; set; }
+        public string phone_number { get; set; }
+        public string username { get; set; }
     }
 }

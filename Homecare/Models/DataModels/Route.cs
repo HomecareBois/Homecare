@@ -14,10 +14,18 @@ namespace Homecare.Models.DataModels
     
     public partial class Route
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Route()
+        {
+            this.Route_Details = new HashSet<Route_Details>();
+        }
+    
         public int id_route { get; set; }
         public int fk_caretaker_route { get; set; }
         public System.DateTime date { get; set; }
     
         public virtual Caretaker Caretaker { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Route_Details> Route_Details { get; set; }
     }
 }

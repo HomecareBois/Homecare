@@ -14,18 +14,12 @@ namespace Homecare.Models.DataModels
     
     public partial class Route_Details
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Route_Details()
-        {
-            this.Schedules = new HashSet<Schedule>();
-        }
-    
-        public int id_route { get; set; }
+        public int id_route_details { get; set; }
         public System.TimeSpan arrival { get; set; }
-        public int fk_caretaker_route { get; set; }
+        public int fk_route_route_details { get; set; }
         public int fk_address_route { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Schedule> Schedules { get; set; }
+        public virtual Address Address { get; set; }
+        public virtual Route Route { get; set; }
     }
 }

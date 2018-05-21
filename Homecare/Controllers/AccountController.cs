@@ -85,7 +85,7 @@ namespace Homecare.Controllers
             //db.Phones.FirstOrDefault(pi => pi.phone_number == inputData.phonenumber).id_phone;
 
 
-            using (HomecareTestDB db = new HomecareTestDB())
+            using (HomecareDBEntities db = new HomecareDBEntities())
             {
                 var userLogin = db.Logins.SingleOrDefault(x => x.username == model.Email && x.password == model.Password);
 

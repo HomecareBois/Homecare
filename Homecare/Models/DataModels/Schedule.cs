@@ -19,7 +19,5 @@ namespace Homecare.Models.DataModels
         public System.DateTime schedule_end { get; set; }
         public int fk_staff_schedule { get; set; }
         public int fk_route_schedule { get; set; }
-    
-        public virtual Route_Details Route_Details { get; set; }
     }
 }

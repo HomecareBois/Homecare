@@ -1,0 +1,78 @@
+﻿@model Homecare.Models.ViewModels.RouteViewModel
+
+@{
+    ViewBag.Title = "CreateRoute";
+}
+
+<h2>Opret Rute</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.caretaker, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @{
+                    Homecare.Models.DataModels.HomecareDBEntities db = new Homecare.Models.DataModels.HomecareDBEntities();
+                    List<SelectListItem> caretakers = new List<SelectListItem>();
+                    foreach(var item in db.Caretakers)
+                    {
+                        caretakers.Add(new SelectListItem { Text = item.caretaker_name, Value = item.caretaker_name });
+                    }
+                }
+                @Html.DropDownListFor(model => model.caretaker, caretakers, "Vælg hjemmehjælper", new { @style = "padding: 7px;" })
+                @Html.ValidationMessageFor(model => model.caretaker, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control", @Placeholder = "dd/MM/yyyy" } })
+                @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.time, new { htmlAttributes = new { @class = "form-control", @Placeholder = "tt.mm" } })
+                @Html.ValidationMessageFor(model => model.time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.patientCpr, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @{
+                    List<SelectListItem> patientNames = new List<SelectListItem>();
+                    foreach (var item in db.Patients)
+                    {
+                        patientNames.Add(new SelectListItem { Text = item.patient_name, Value = item.patient_name });
+                    }
+                }
+                @Html.DropDownListFor(model => model.patientCpr, patientNames, "Vælg patient", new { @style = "padding: 7px;" })
+                @Html.ValidationMessageFor(model => model.patientCpr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

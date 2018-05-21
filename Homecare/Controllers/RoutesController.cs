@@ -1,4 +1,4 @@
-﻿½using Homecare.Models.DataModels;
+﻿using Homecare.Models.DataModels;
 using Homecare.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -41,8 +41,7 @@ namespace Homecare.Controllers
             if(ModelState.IsValid)
             {
                 using (HomecareDBEntities db = new HomecareDBEntities())
-                {
-
+                { 
                     var caretaker = db.Caretakers.First(ca => ca.caretaker_name == inputData.Caretaker.caretaker_name);
                     var route = new Route
                     {
@@ -51,7 +50,6 @@ namespace Homecare.Controllers
                     };
                     db.Routes.Add(route);
                     db.SaveChanges();
-
                 }
             }
             return View();

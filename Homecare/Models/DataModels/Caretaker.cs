@@ -21,10 +21,10 @@ namespace Homecare.Models.DataModels
         {
             this.Routes = new HashSet<Route>();
         }
-    
+
         public int id_caretaker { get; set; }
         [DisplayName("Navn")]
-        [Required(ErrorMessage = "Du skal vælge en hjemmehjælper")]
+        [Required]
         public string caretaker_name { get; set; }
         public int fk_login_caretaker { get; set; }
         public Nullable<int> fk_phone_caretaker { get; set; }
