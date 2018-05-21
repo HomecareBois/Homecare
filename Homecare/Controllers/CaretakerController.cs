@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Homecare.Models.DataModels;
@@ -42,15 +44,25 @@ namespace Homecare.Controllers
                         user_rights_type = inputData.user_rights
                     };
 
-                    db.User_Rights.Add(userRights);
-                    db.SaveChanges();
-
                     var userRightsID = db.User_Rights.FirstOrDefault(ur => ur.user_rights_type == inputData.user_rights).id_user_rights;
+
+                    //vi hasher password
+                    SHA256 sha256 = SHA256Managed.Create();
+                    byte[] bytes = Encoding.UTF8.GetBytes(inputData.password);
+                    byte[] hash = sha256.ComputeHash(bytes);
+
+                    StringBuilder result = new StringBuilder();
+                    for (int i = 0; i < hash.Length; i++)
+                    {
+                        result.Append(hash[i].ToString("X2"));
+                    }
+                    var pass = result.ToString();
+                    //Vi er færdige med at hashe
 
                     var userLogin = new Login
                     {
                         username = inputData.username,
-                        password = inputData.password,
+                        password = pass,
                         fk_user_rights_login = userRightsID
                     };
 
