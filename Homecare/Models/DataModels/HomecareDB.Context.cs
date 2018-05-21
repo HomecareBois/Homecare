@@ -40,6 +40,7 @@ namespace Homecare.Models.DataModels
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User_Rights> User_Rights { get; set; }
+        public virtual DbSet<Zipcode> Zipcodes { get; set; }
         public virtual DbSet<CaretakerView> CaretakerViews { get; set; }
         public virtual DbSet<PatientView> PatientViews { get; set; }
         public virtual DbSet<RouteView> RouteViews { get; set; }

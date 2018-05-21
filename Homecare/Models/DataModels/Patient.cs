@@ -14,6 +14,12 @@ namespace Homecare.Models.DataModels
     
     public partial class Patient
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Patient()
+        {
+            this.Route_Details = new HashSet<Route_Details>();
+        }
+    
         public int id_patient { get; set; }
         public string patient_name { get; set; }
         public string cpr { get; set; }
@@ -23,5 +29,7 @@ namespace Homecare.Models.DataModels
     
         public virtual Address Address { get; set; }
         public virtual Phone Phone { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Route_Details> Route_Details { get; set; }
     }
 }

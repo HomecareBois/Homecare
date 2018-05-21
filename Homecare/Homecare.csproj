@@ -197,82 +197,86 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DataModels\Address.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Caretaker.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\CaretakerView.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\City.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\database_firewall_rules.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataModels\HomeareDB.Context.cs">
+    <Compile Include="Models\DataModels\HomecareDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HomeareDB.Context.tt</DependentUpon>
+      <DependentUpon>HomecareDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataModels\HomeareDB.cs">
+    <Compile Include="Models\DataModels\HomecareDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataModels\HomeareDB.Designer.cs">
+    <Compile Include="Models\DataModels\HomecareDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HomeareDB.edmx</DependentUpon>
+      <DependentUpon>HomecareDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Login.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Occupation.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Patient.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\PatientView.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Phone.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Route.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\RouteView.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Route_Details.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Schedule.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\sp_helpdiagrams_Result.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Staff.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\sysdiagram.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\User_Rights.cs">
-      <DependentUpon>HomeareDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModels\Zipcode.cs">
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -290,15 +294,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\DataModels\HomeareDB.Context.tt">
+    <Content Include="Models\DataModels\HomecareDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HomeareDB.edmx</DependentUpon>
-      <LastGenOutput>HomeareDB.Context.cs</LastGenOutput>
+      <DependentUpon>HomecareDB.edmx</DependentUpon>
+      <LastGenOutput>HomecareDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DataModels\HomeareDB.tt">
+    <Content Include="Models\DataModels\HomecareDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HomeareDB.edmx</DependentUpon>
-      <LastGenOutput>HomeareDB.cs</LastGenOutput>
+      <DependentUpon>HomecareDB.edmx</DependentUpon>
+      <LastGenOutput>HomecareDB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -306,12 +310,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <EntityDeploy Include="Models\DataModels\HomeareDB.edmx">
+    <EntityDeploy Include="Models\DataModels\HomecareDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HomeareDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>HomecareDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DataModels\HomeareDB.edmx.diagram">
-      <DependentUpon>HomeareDB.edmx</DependentUpon>
+    <Content Include="Models\DataModels\HomecareDB.edmx.diagram">
+      <DependentUpon>HomecareDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -372,10 +376,11 @@
     <Content Include="Views\Routes\Index.cshtml" />
     <Content Include="Views\Account\LoginView.cshtml" />
     <Content Include="Views\Account\LoginLandingPage.cshtml" />
+    <Content Include="Views\RouteDetails\RouteDetails.cshtml" />
+    <Content Include="Views\RouteDetails\CreateRouteDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\RouteDetails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

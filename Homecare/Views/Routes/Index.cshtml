@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Homecare.Models.ViewModels.RoutesListView>
+﻿@model IEnumerable<Homecare.Models.DataModels.Route>
 
 @{
     ViewBag.Title = "Ruter";
@@ -32,14 +32,14 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Caretaker.caretaker_name)
+                @Html.DisplayFor(modelItem => item.Caretaker.caretaker_name))
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.date)
             </td>
             <td>
-                @Html.ActionLink("Tilføj punkter", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Tilføj punkter", "CreateRouteDetails", "RouteDetails", new { id=item.id_route }, null) |
+                @Html.ActionLink("Se rute", "RouteDetails", "RouteDetails", new { id=item.id_route }, null) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>

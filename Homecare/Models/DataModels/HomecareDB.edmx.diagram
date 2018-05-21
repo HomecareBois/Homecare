@@ -4,27 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a45cb9f4333148e6ad9dc852e2878784" Name="Diagram1">
-        <EntityTypeShape EntityType="HomecareDBModel.Address" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+      <Diagram DiagramId="cde8ad7d58f140ceb3baa9c1304ee6c0" Name="Diagram1">
+        <EntityTypeShape EntityType="HomecareDBModel.Address" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HomecareDBModel.Caretaker" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="HomecareDBModel.City" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomecareDBModel.City" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HomecareDBModel.Login" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="HomecareDBModel.Occupation" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="HomecareDBModel.Patient" Width="1.5" PointX="9.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomecareDBModel.Occupation" Width="1.5" PointX="5.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomecareDBModel.Patient" Width="1.5" PointX="7.5" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HomecareDBModel.Phone" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HomecareDBModel.Route" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="HomecareDBModel.Route_Details" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="HomecareDBModel.Schedule" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HomecareDBModel.Staff" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HomecareDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomecareDBModel.Schedule" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomecareDBModel.Staff" Width="1.5" PointX="8" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomecareDBModel.sysdiagram" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HomecareDBModel.User_Rights" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="HomecareDBModel.CaretakerView" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HomecareDBModel.PatientView" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HomecareDBModel.RouteView" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HomecareDBModel.database_firewall_rules" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomecareDBModel.Zipcode" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomecareDBModel.CaretakerView" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomecareDBModel.PatientView" Width="1.5" PointX="11.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomecareDBModel.RouteView" Width="1.5" PointX="11.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomecareDBModel.database_firewall_rules" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
         <AssociationConnector Association="HomecareDBModel.FK_Address_City" ManuallyRouted="false" />
         <AssociationConnector Association="HomecareDBModel.FK_Patient_Address" ManuallyRouted="false" />
-        <AssociationConnector Association="HomecareDBModel.FK_Route_Details_Address" ManuallyRouted="false" />
         <AssociationConnector Association="HomecareDBModel.FK_Caretaker_Login" ManuallyRouted="false" />
         <AssociationConnector Association="HomecareDBModel.FK_Caretaker_Phone" ManuallyRouted="false" />
         <AssociationConnector Association="HomecareDBModel.FK_Route_Caretaker" ManuallyRouted="false" />
@@ -32,6 +32,7 @@
         <AssociationConnector Association="HomecareDBModel.FK_Login_User_Rights" ManuallyRouted="false" />
         <AssociationConnector Association="HomecareDBModel.FK_Staff_Occupation" ManuallyRouted="false" />
         <AssociationConnector Association="HomecareDBModel.FK_Patient_Phone" ManuallyRouted="false" />
+        <AssociationConnector Association="HomecareDBModel.FK_Route_Details_Patient" ManuallyRouted="false" />
         <AssociationConnector Association="HomecareDBModel.FK_Route_Details_Route" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
