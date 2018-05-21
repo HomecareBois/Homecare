@@ -26,7 +26,7 @@ namespace Homecare.Controllers
             }
             return View(routes);
         }
-        
+
         public ActionResult CreateRouteDetails()
         {
             return View();
@@ -39,17 +39,22 @@ namespace Homecare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
+            
             using (HomecareDBEntities db = new HomecareDBEntities())
             {
-                Route_Details route = new Route_Details
+                if(ModelState.IsValid)
                 {
-                    fk_patient_route_details = inputData.Patient.id_patient,
-                    fk_route_route_details = (int)id,
-                    arrival = inputData.arrival
-                };
-                db.Route_Details.Add(route);
-                db.SaveChanges();
+                    Route_Details route = new Route_Details
+                    {
+                        fk_patient_route_details = inputData.Patient.id_patient,
+                        fk_route_route_details = (int)id,
+                        arrival = inputData.arrival
+                    };
+                    db.Route_Details.Add(route);
+                    db.SaveChanges();
+                }
+                ModelState.Clear();
+                ViewBag.created = "Besøg for " + inputData.Patient.patient_name.ToString() + " er oprettet";
             }
 
             return View();

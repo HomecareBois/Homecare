@@ -18,7 +18,7 @@ namespace Homecare.Models.DataModels
     {
         public int id_route_details { get; set; }
         [Required(ErrorMessage = "Du skal skrive et tidspunkt")]
-        [DisplayName("Tid")]
+        [DisplayName("Ankomst")]
         [DataType(DataType.Time)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh.mm")]
         public System.TimeSpan arrival { get; set; }

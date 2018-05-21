@@ -14,18 +14,6 @@ namespace Homecare.Controllers
     {
         public ActionResult Index()
         {
-            //    HomecareDBEntities db = new HomecareDBEntities();
-            //    List<RoutesListView> routes = new List<RoutesListView>();
-            //    foreach (var item in db.Routes)
-            //    {
-            //        RoutesListView route = new RoutesListView
-            //        {
-            //            Caretaker = item.Caretaker,
-            //            date = item.date.ToString("dd-MM-yyyy");
-            //      };
-            //    routes.Add(route);
-            //}
-            //    return View(routes);
             HomecareDBEntities db = new HomecareDBEntities();
             return View(db.Routes.ToList());
         }
