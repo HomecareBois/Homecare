@@ -84,15 +84,15 @@ namespace Homecare.Controllers
                 return View(db.Patients.ToList());
             }
         }*/
-        //public ActionResult PatientView()
-        //{
-        //    using (HomecareDBEntities db = new HomecareDBEntities())
-        //    {
-        //        return View(db.PatientViews.ToList());
-        //    }
-        //}
+        public ActionResult PatientView()
+        {
+            using (HomecareDBEntities db = new HomecareDBEntities())
+            {
+                return View(db.PatientViews.ToList());
+            }
+        }
 
-        public ActionResult PatientDetails (int? id)
+        public ActionResult PatientDetails(int? id)
         {
             if (id == null)
             {
@@ -124,9 +124,8 @@ namespace Homecare.Controllers
             return View(pvm);
         }
 
-        public ActionResult EditPatient (int? id)
+        public ActionResult EditPatient(int? id)
         {
-            Debug.WriteLine("Test: " + id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -161,7 +160,7 @@ namespace Homecare.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPatient (PatientViewModel pvm, int? id)
+        public ActionResult EditPatient(PatientViewModel pvm, int? id)
         {
 
             if (ModelState.IsValid)
@@ -193,7 +192,7 @@ namespace Homecare.Controllers
             return View();
         }
 
-        public ActionResult DeletePatient (int? id)
+        public ActionResult DeletePatient(int? id)
         {
             if (id == null)
             {
@@ -228,7 +227,7 @@ namespace Homecare.Controllers
         }
 
         [HttpPost, ActionName("DeletePatient")]
-        public ActionResult DeletePatient (int id)
+        public ActionResult DeletePatient(int id)
         {
             HomecareDBEntities db = new HomecareDBEntities();
 
@@ -239,11 +238,10 @@ namespace Homecare.Controllers
 
             db.Patients.Remove(patient);
             db.Addresses.Remove(address);
-            //db.Cities.Remove(city);
             db.Phones.Remove(phone);
             db.SaveChanges();
 
-            return RedirectToAction("PatientList");
+            return RedirectToAction("PatientView");
         }
     }
 }

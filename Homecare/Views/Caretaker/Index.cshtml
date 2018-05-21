@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Homecare.Models.DataModels.CaretakerView>
+
+@{
+    ViewBag.Title = "Hjemmehjælpere";
+}
+
+<h2>Hjemmehjælpere</h2>
+
+<p>
+    @Html.ActionLink("Opret", "CreateCaretaker")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.caretaker_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phone_number)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.caretaker_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone_number)
+        </td>
+        <td>
+            @Html.ActionLink("Rediger", "EditCaretaker", new { id = item.id_caretaker }) |
+            @Html.ActionLink("Slet", "DeleteCaretaker", new { id=item.id_caretaker })
+        </td>
+    </tr>
+}
+
+</table>

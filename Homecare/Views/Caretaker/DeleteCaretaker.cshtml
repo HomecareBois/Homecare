@@ -1,0 +1,70 @@
+﻿@model Homecare.Models.ViewModels.CaretakerViewModel
+
+@{
+    ViewBag.Title = "DeleteCaretaker";
+}
+
+<h2>Slet hjemmehjælper</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.confirmPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.confirmPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_rights)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_rights)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phonenumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phonenumber)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Slet" class="btn btn-default" /> |
+            @Html.ActionLink("Tilbage", "Index")
+        </div>
+    }
+</div>

@@ -378,6 +378,9 @@
     <Content Include="Views\Account\LoginLandingPage.cshtml" />
     <Content Include="Views\RouteDetails\RouteDetails.cshtml" />
     <Content Include="Views\RouteDetails\CreateRouteDetails.cshtml" />
+    <Content Include="Views\Caretaker\Index.cshtml" />
+    <Content Include="Views\Caretaker\EditCaretaker.cshtml" />
+    <Content Include="Views\Caretaker\DeleteCaretaker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
