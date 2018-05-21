@@ -125,7 +125,6 @@ namespace Homecare.Controllers
 
         public ActionResult EditPatient (int? id)
         {
-            Debug.WriteLine("Test: " + id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -238,11 +237,10 @@ namespace Homecare.Controllers
 
             db.Patients.Remove(patient);
             db.Addresses.Remove(address);
-            //db.Cities.Remove(city);
             db.Phones.Remove(phone);
             db.SaveChanges();
 
-            return RedirectToAction("PatientList");
+            return RedirectToAction("PatientView");
         }
     }
 }

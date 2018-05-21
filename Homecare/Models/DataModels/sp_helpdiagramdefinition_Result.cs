@@ -10,18 +10,10 @@
 namespace Homecare.Models.DataModels
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class PatientView
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public string patient_name { get; set; }
-        public string road_name { get; set; }
-        public string number { get; set; }
-        public string phone_number { get; set; }
-        public string city_name { get; set; }
-        public string zipcode { get; set; }
-        public string cpr { get; set; }
-        public string relative_phonenumber { get; set; }
-        public int id_patient { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

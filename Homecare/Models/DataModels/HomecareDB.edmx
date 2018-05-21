@@ -70,10 +70,17 @@
             <PropertyRef Name="id_route" />
           </Key>
           <Property Name="id_route" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="arrival" Type="time" Precision="7" Nullable="false" />
-          <Property Name="date" Type="date" Nullable="false" />
           <Property Name="fk_caretaker_route" Type="int" Nullable="false" />
-          <Property Name="fk_address_route" Type="int" Nullable="false" />
+          <Property Name="date" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Route_Details">
+          <Key>
+            <PropertyRef Name="id_route_details" />
+          </Key>
+          <Property Name="id_route_details" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="arrival" Type="time" Precision="0" Nullable="false" />
+          <Property Name="fk_route_route_details" Type="int" Nullable="false" />
+          <Property Name="fk_patient_route_details" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
@@ -114,13 +121,15 @@
 warning 6002: The table/view 'HomecareDB.dbo.CaretakerView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CaretakerView">
           <Key>
-            <PropertyRef Name="username" />
-            <PropertyRef Name="phone_number" />
             <PropertyRef Name="caretaker_name" />
+            <PropertyRef Name="id_caretaker" />
+            <PropertyRef Name="phone_number" />
+            <PropertyRef Name="username" />
           </Key>
-          <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="phone_number" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="caretaker_name" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="id_caretaker" Type="int" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'HomecareDB.dbo.PatientView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -207,6 +216,30 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Caretaker_Phone">
+          <End Role="Phone" Type="Self.Phone" Multiplicity="0..1" />
+          <End Role="Caretaker" Type="Self.Caretaker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phone">
+              <PropertyRef Name="id_phone" />
+            </Principal>
+            <Dependent Role="Caretaker">
+              <PropertyRef Name="fk_phone_caretaker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Login">
+          <End Role="Login" Type="Self.Login" Multiplicity="1" />
+          <End Role="Login1" Type="Self.Login" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="id_login" />
+            </Principal>
+            <Dependent Role="Login1">
+              <PropertyRef Name="id_login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Login_User_Rights">
           <End Role="User_Rights" Type="Self.User_Rights" Multiplicity="1" />
           <End Role="Login" Type="Self.Login" Multiplicity="*" />
@@ -243,18 +276,6 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Route_Address">
-          <End Role="Address" Type="Self.Address" Multiplicity="1" />
-          <End Role="Route" Type="Self.Route" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="id_address" />
-            </Principal>
-            <Dependent Role="Route">
-              <PropertyRef Name="fk_address_route" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Route_Caretaker">
           <End Role="Caretaker" Type="Self.Caretaker" Multiplicity="1" />
           <End Role="Route" Type="Self.Route" Multiplicity="*" />
@@ -267,15 +288,27 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Schedule_Route">
+        <Association Name="FK_Route_Details_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Route_Details" Type="Self.Route_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id_patient" />
+            </Principal>
+            <Dependent Role="Route_Details">
+              <PropertyRef Name="fk_patient_route_details" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_Details_Route">
           <End Role="Route" Type="Self.Route" Multiplicity="1" />
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <End Role="Route_Details" Type="Self.Route_Details" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Route">
               <PropertyRef Name="id_route" />
             </Principal>
-            <Dependent Role="Schedule">
-              <PropertyRef Name="fk_route_schedule" />
+            <Dependent Role="Route_Details">
+              <PropertyRef Name="fk_route_route_details" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -291,6 +324,37 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="HomecareDBModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Caretaker" EntityType="Self.Caretaker" Schema="dbo" store:Type="Tables" />
@@ -300,15 +364,17 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Phone" EntityType="Self.Phone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Route" EntityType="Self.Route" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Route_Details" EntityType="Self.Route_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Rights" EntityType="Self.User_Rights" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CaretakerView" EntityType="Self.CaretakerView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [CaretakerView].[username] AS [username], 
+    [CaretakerView].[caretaker_name] AS [caretaker_name], 
+    [CaretakerView].[id_caretaker] AS [id_caretaker], 
     [CaretakerView].[phone_number] AS [phone_number], 
-    [CaretakerView].[caretaker_name] AS [caretaker_name]
+    [CaretakerView].[username] AS [username]
     FROM [dbo].[CaretakerView] AS [CaretakerView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PatientView" EntityType="Self.PatientView" store:Type="Views" store:Schema="dbo">
@@ -353,6 +419,14 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             <End Role="Login" EntitySet="Login" />
             <End Role="Caretaker" EntitySet="Caretaker" />
           </AssociationSet>
+          <AssociationSet Name="FK_Caretaker_Phone" Association="Self.FK_Caretaker_Phone">
+            <End Role="Phone" EntitySet="Phone" />
+            <End Role="Caretaker" EntitySet="Caretaker" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Login" Association="Self.FK_Login_Login">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Login1" EntitySet="Login" />
+          </AssociationSet>
           <AssociationSet Name="FK_Login_User_Rights" Association="Self.FK_Login_User_Rights">
             <End Role="User_Rights" EntitySet="User_Rights" />
             <End Role="Login" EntitySet="Login" />
@@ -365,17 +439,17 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             <End Role="Phone" EntitySet="Phone" />
             <End Role="Patient" EntitySet="Patient" />
           </AssociationSet>
-          <AssociationSet Name="FK_Route_Address" Association="Self.FK_Route_Address">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Route" EntitySet="Route" />
-          </AssociationSet>
           <AssociationSet Name="FK_Route_Caretaker" Association="Self.FK_Route_Caretaker">
             <End Role="Caretaker" EntitySet="Caretaker" />
             <End Role="Route" EntitySet="Route" />
           </AssociationSet>
-          <AssociationSet Name="FK_Schedule_Route" Association="Self.FK_Schedule_Route">
+          <AssociationSet Name="FK_Route_Details_Patient" Association="Self.FK_Route_Details_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Route_Details" EntitySet="Route_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_Details_Route" Association="Self.FK_Route_Details_Route">
             <End Role="Route" EntitySet="Route" />
-            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="Route_Details" EntitySet="Route_Details" />
           </AssociationSet>
           <AssociationSet Name="FK_Staff_Occupation" Association="Self.FK_Staff_Occupation">
             <End Role="Occupation" EntitySet="Occupation" />
@@ -396,7 +470,6 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <Property Name="fk_city_address" Type="Int32" Nullable="false" />
           <NavigationProperty Name="City" Relationship="Self.FK_Address_City" FromRole="Address" ToRole="City" />
           <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_Address" FromRole="Address" ToRole="Patient" />
-          <NavigationProperty Name="Routes" Relationship="Self.FK_Route_Address" FromRole="Address" ToRole="Route" />
         </EntityType>
         <EntityType Name="Caretaker">
           <Key>
@@ -408,6 +481,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <Property Name="fk_phone_caretaker" Type="Int32" />
           <NavigationProperty Name="Login" Relationship="Self.FK_Caretaker_Login" FromRole="Caretaker" ToRole="Login" />
           <NavigationProperty Name="Routes" Relationship="Self.FK_Route_Caretaker" FromRole="Caretaker" ToRole="Route" />
+          <NavigationProperty Name="Phone" Relationship="HomecareDBModel.FK_Caretaker_Phone" FromRole="Caretaker" ToRole="Phone" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -428,6 +502,8 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <Property Name="fk_user_rights_login" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Caretakers" Relationship="Self.FK_Caretaker_Login" FromRole="Login" ToRole="Caretaker" />
           <NavigationProperty Name="User_Rights" Relationship="Self.FK_Login_User_Rights" FromRole="Login" ToRole="User_Rights" />
+          <NavigationProperty Name="Login1" Relationship="HomecareDBModel.FK_Login_Login" FromRole="Login" ToRole="Login1" />
+          <NavigationProperty Name="Login2" Relationship="HomecareDBModel.FK_Login_Login" FromRole="Login1" ToRole="Login" />
         </EntityType>
         <EntityType Name="Occupation">
           <Key>
@@ -449,6 +525,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <Property Name="fk_phone_patient" Type="Int32" />
           <NavigationProperty Name="Address" Relationship="Self.FK_Patient_Address" FromRole="Patient" ToRole="Address" />
           <NavigationProperty Name="Phone" Relationship="Self.FK_Patient_Phone" FromRole="Patient" ToRole="Phone" />
+          <NavigationProperty Name="Route_Details" Relationship="HomecareDBModel.FK_Route_Details_Patient" FromRole="Patient" ToRole="Route_Details" />
         </EntityType>
         <EntityType Name="Phone">
           <Key>
@@ -457,19 +534,18 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <Property Name="id_phone" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="phone_number" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_Phone" FromRole="Phone" ToRole="Patient" />
+          <NavigationProperty Name="Caretakers" Relationship="HomecareDBModel.FK_Caretaker_Phone" FromRole="Phone" ToRole="Caretaker" />
         </EntityType>
         <EntityType Name="Route">
           <Key>
             <PropertyRef Name="id_route" />
           </Key>
           <Property Name="id_route" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="arrival" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="false" />
           <Property Name="fk_caretaker_route" Type="Int32" Nullable="false" />
-          <Property Name="fk_address_route" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="Self.FK_Route_Address" FromRole="Route" ToRole="Address" />
           <NavigationProperty Name="Caretaker" Relationship="Self.FK_Route_Caretaker" FromRole="Route" ToRole="Caretaker" />
           <NavigationProperty Name="Schedules" Relationship="Self.FK_Schedule_Route" FromRole="Route" ToRole="Schedule" />
+          <NavigationProperty Name="Route_Details" Relationship="HomecareDBModel.FK_Route_Details_Route" FromRole="Route" ToRole="Route_Details" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
@@ -530,18 +606,6 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             </Principal>
             <Dependent Role="Patient">
               <PropertyRef Name="fk_address_patient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Route_Address">
-          <End Role="Address" Type="Self.Address" Multiplicity="1" />
-          <End Role="Route" Type="Self.Route" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="id_address" />
-            </Principal>
-            <Dependent Role="Route">
-              <PropertyRef Name="fk_address_route" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -638,10 +702,6 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             <End Role="Address" EntitySet="Addresses" />
             <End Role="Patient" EntitySet="Patients" />
           </AssociationSet>
-          <AssociationSet Name="FK_Route_Address" Association="Self.FK_Route_Address">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="Route" EntitySet="Routes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Caretaker_Login" Association="Self.FK_Caretaker_Login">
             <End Role="Login" EntitySet="Logins" />
             <End Role="Caretaker" EntitySet="Caretakers" />
@@ -670,16 +730,65 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <EntitySet Name="PatientViews" EntityType="HomecareDBModel.PatientView" />
           <EntitySet Name="RouteViews" EntityType="HomecareDBModel.RouteView" />
           <EntitySet Name="database_firewall_rules" EntityType="HomecareDBModel.database_firewall_rules" />
+          <AssociationSet Name="FK_Caretaker_Phone" Association="HomecareDBModel.FK_Caretaker_Phone">
+            <End Role="Phone" EntitySet="Phones" />
+            <End Role="Caretaker" EntitySet="Caretakers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Login" Association="HomecareDBModel.FK_Login_Login">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="Login1" EntitySet="Logins" />
+          </AssociationSet>
+          <EntitySet Name="Route_Details" EntityType="HomecareDBModel.Route_Details" />
+          <AssociationSet Name="FK_Route_Details_Route" Association="HomecareDBModel.FK_Route_Details_Route">
+            <End Role="Route" EntitySet="Routes" />
+            <End Role="Route_Details" EntitySet="Route_Details" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(HomecareDBModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(HomecareDBModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_Route_Details_Patient" Association="HomecareDBModel.FK_Route_Details_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Route_Details" EntitySet="Route_Details" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CaretakerView">
           <Key>
             <PropertyRef Name="username" />
             <PropertyRef Name="phone_number" />
             <PropertyRef Name="caretaker_name" />
+            <PropertyRef Name="id_caretaker" />
           </Key>
           <Property Name="username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="phone_number" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="caretaker_name" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="id_caretaker" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="PatientView">
           <Key>
@@ -736,6 +845,76 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <Association Name="FK_Caretaker_Phone">
+          <End Type="HomecareDBModel.Phone" Role="Phone" Multiplicity="0..1" />
+          <End Type="HomecareDBModel.Caretaker" Role="Caretaker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phone">
+              <PropertyRef Name="id_phone" />
+            </Principal>
+            <Dependent Role="Caretaker">
+              <PropertyRef Name="fk_phone_caretaker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Login">
+          <End Type="HomecareDBModel.Login" Role="Login" Multiplicity="1" />
+          <End Type="HomecareDBModel.Login" Role="Login1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="id_login" />
+            </Principal>
+            <Dependent Role="Login1">
+              <PropertyRef Name="id_login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Route_Details">
+          <Key>
+            <PropertyRef Name="id_route_details" />
+          </Key>
+          <Property Name="id_route_details" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="arrival" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="fk_route_route_details" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Route" Relationship="HomecareDBModel.FK_Route_Details_Route" FromRole="Route_Details" ToRole="Route" />
+          <Property Name="fk_patient_route_details" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="HomecareDBModel.FK_Route_Details_Patient" FromRole="Route_Details" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK_Route_Details_Route">
+          <End Type="HomecareDBModel.Route" Role="Route" Multiplicity="1" />
+          <End Type="HomecareDBModel.Route_Details" Role="Route_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="id_route" />
+            </Principal>
+            <Dependent Role="Route_Details">
+              <PropertyRef Name="fk_route_route_details" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <Association Name="FK_Route_Details_Patient">
+          <End Type="HomecareDBModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="HomecareDBModel.Route_Details" Role="Route_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id_patient" />
+            </Principal>
+            <Dependent Role="Route_Details">
+              <PropertyRef Name="fk_patient_route_details" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -812,11 +991,9 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <EntitySetMapping Name="Routes">
             <EntityTypeMapping TypeName="HomecareDBModel.Route">
               <MappingFragment StoreEntitySet="Route">
-                <ScalarProperty Name="id_route" ColumnName="id_route" />
-                <ScalarProperty Name="arrival" ColumnName="arrival" />
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id_route" ColumnName="id_route" />
                 <ScalarProperty Name="fk_caretaker_route" ColumnName="fk_caretaker_route" />
-                <ScalarProperty Name="fk_address_route" ColumnName="fk_address_route" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -862,6 +1039,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <EntitySetMapping Name="CaretakerViews">
             <EntityTypeMapping TypeName="HomecareDBModel.CaretakerView">
               <MappingFragment StoreEntitySet="CaretakerView">
+                <ScalarProperty Name="id_caretaker" ColumnName="id_caretaker" />
                 <ScalarProperty Name="caretaker_name" ColumnName="caretaker_name" />
                 <ScalarProperty Name="phone_number" ColumnName="phone_number" />
                 <ScalarProperty Name="username" ColumnName="username" />
@@ -908,6 +1086,40 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Route_Details">
+            <EntityTypeMapping TypeName="HomecareDBModel.Route_Details">
+              <MappingFragment StoreEntitySet="Route_Details">
+                <ScalarProperty Name="fk_patient_route_details" ColumnName="fk_patient_route_details" />
+                <ScalarProperty Name="fk_route_route_details" ColumnName="fk_route_route_details" />
+                <ScalarProperty Name="arrival" ColumnName="arrival" />
+                <ScalarProperty Name="id_route_details" ColumnName="id_route_details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="HomecareDBModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="HomecareDBModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="HomecareDBModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="HomecareDBModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HomecareDBModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="HomecareDBModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HomecareDBModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="HomecareDBModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="HomecareDBModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

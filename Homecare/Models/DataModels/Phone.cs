@@ -18,6 +18,7 @@ namespace Homecare.Models.DataModels
         public Phone()
         {
             this.Patients = new HashSet<Patient>();
+            this.Caretakers = new HashSet<Caretaker>();
         }
     
         public int id_phone { get; set; }
@@ -25,5 +26,7 @@ namespace Homecare.Models.DataModels
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Patient> Patients { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Caretaker> Caretakers { get; set; }
     }
 }

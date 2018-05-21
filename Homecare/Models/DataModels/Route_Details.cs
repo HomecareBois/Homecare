@@ -12,16 +12,14 @@ namespace Homecare.Models.DataModels
     using System;
     using System.Collections.Generic;
     
-    public partial class PatientView
+    public partial class Route_Details
     {
-        public string patient_name { get; set; }
-        public string road_name { get; set; }
-        public string number { get; set; }
-        public string phone_number { get; set; }
-        public string city_name { get; set; }
-        public string zipcode { get; set; }
-        public string cpr { get; set; }
-        public string relative_phonenumber { get; set; }
-        public int id_patient { get; set; }
+        public int id_route_details { get; set; }
+        public System.TimeSpan arrival { get; set; }
+        public int fk_route_route_details { get; set; }
+        public int fk_patient_route_details { get; set; }
+    
+        public virtual Route Route { get; set; }
+        public virtual Patient Patient { get; set; }
     }
 }

@@ -28,5 +28,7 @@ namespace Homecare.Models.DataModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Caretaker> Caretakers { get; set; }
         public virtual User_Rights User_Rights { get; set; }
+        public virtual Login Login1 { get; set; }
+        public virtual Login Login2 { get; set; }
     }
 }
