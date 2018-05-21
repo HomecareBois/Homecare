@@ -32,8 +32,27 @@ namespace Homecare.Controllers
                         zipcode = inputData.zipCode
                     };
 
-                    db.Cities.Add(c);
-                    db.SaveChanges();
+                    var boolZipExist = false;
+                    foreach (var item in db.Zipcodes)
+                    {
+                        int val = 0;
+                        Int32.TryParse(inputData.zipCode, out val);
+                        if (item.zipcode1 == val)
+                        {
+                            boolZipExist = true;
+                        }
+                    }
+
+                    if (boolZipExist)
+                    {
+                        db.Cities.Add(c);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        ViewBag.error = "Fejl ved indtastning af zipkoden";
+                        return View();
+                    }
 
                     var phone = new Phone
                     {
