@@ -18,7 +18,6 @@ namespace Homecare.Models.DataModels
         public Address()
         {
             this.Patients = new HashSet<Patient>();
-            this.RouteDetails = new HashSet<RouteDetail>();
         }
     
         public int id_address { get; set; }
@@ -29,7 +28,5 @@ namespace Homecare.Models.DataModels
         public virtual City City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Patient> Patients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RouteDetail> RouteDetails { get; set; }
     }
 }

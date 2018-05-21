@@ -1,4 +1,4 @@
-﻿using Homecare.Models.DataModels;
+﻿½using Homecare.Models.DataModels;
 using Homecare.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Homecare.Controllers
     {
         public ActionResult Index()
         {
-            HomecareTestDB db = new HomecareTestDB();
+            HomecareDBEntities db = new HomecareDBEntities();
             List<RoutesListView> routes = new List<RoutesListView>();
             foreach (var item in db.Routes)
             {
@@ -35,17 +35,12 @@ namespace Homecare.Controllers
             return View();
         }
 
-        public ActionResult CreateRouteTest()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public ActionResult CreateRouteTest(Route inputData)
+        public ActionResult CreateRoute(Route inputData)
         {
             if(ModelState.IsValid)
             {
-                using (HomecareTestDB db = new HomecareTestDB())
+                using (HomecareDBEntities db = new HomecareDBEntities())
                 {
 
                     var caretaker = db.Caretakers.First(ca => ca.caretaker_name == inputData.Caretaker.caretaker_name);
@@ -66,7 +61,7 @@ namespace Homecare.Controllers
         //{
         //    if(ModelState.IsValid)
         //    {
-        //        using (HomecareTestDB db = new HomecareTestDB())
+        //        using (HomecareDBEntities db = new HomecareDBEntities())
         //        {
         //            var tidspunkt = inputData.time;
         //            var dato = inputData.date;

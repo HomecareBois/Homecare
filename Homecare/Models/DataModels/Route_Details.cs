@@ -11,27 +11,21 @@ namespace Homecare.Models.DataModels
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class Caretaker
+    
+    public partial class Route_Details
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Caretaker()
+        public Route_Details()
         {
-            this.Routes = new HashSet<Route>();
+            this.Schedules = new HashSet<Schedule>();
         }
     
-        public int id_caretaker { get; set; }
-        [DisplayName("Navn")]
-        [Required(ErrorMessage = "Du skal vælge en hjemmehjælper")]
-        public string caretaker_name { get; set; }
-        public int fk_login_caretaker { get; set; }
-        public Nullable<int> fk_phone_caretaker { get; set; }
+        public int id_route { get; set; }
+        public System.TimeSpan arrival { get; set; }
+        public int fk_caretaker_route { get; set; }
+        public int fk_address_route { get; set; }
     
-        public virtual Login Login { get; set; }
-        public virtual Phone Phone { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Route> Routes { get; set; }
+        public virtual ICollection<Schedule> Schedules { get; set; }
     }
 }

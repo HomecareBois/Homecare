@@ -203,16 +203,16 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DataModels\Address.cs">
-      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Caretaker.cs">
-      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\CaretakerView.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\City.cs">
-      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\database_firewall_rules.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
@@ -248,22 +248,22 @@
       <DependentUpon>HomecareTestDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Login.cs">
-      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Occupation.cs">
-      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Patient.cs">
-      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\PatientView.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Phone.cs">
-      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Route.cs">
-      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\RouteDetail.cs">
       <DependentUpon>HomecareTestDB.tt</DependentUpon>
@@ -271,17 +271,26 @@
     <Compile Include="Models\DataModels\RouteView.cs">
       <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\Route_Details.cs">
+      <DependentUpon>HomecareDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataModels\Schedule.cs">
-      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModels\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>HomecareDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModels\sp_helpdiagrams_Result.cs">
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Staff.cs">
-      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\sysdiagram.cs">
-      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\User_Rights.cs">
-      <DependentUpon>HomecareTestDB.tt</DependentUpon>
+      <DependentUpon>HomecareDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -324,19 +333,19 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\DataModels\HomecareDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HomecareDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DataModels\HomecareDB.edmx.diagram">
-      <DependentUpon>HomecareDB.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\DataModels\HomecareTestDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>HomecareTestDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\DataModels\HomecareTestDB.edmx.diagram">
       <DependentUpon>HomecareTestDB.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DataModels\HomecareDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HomecareDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DataModels\HomecareDB.edmx.diagram">
+      <DependentUpon>HomecareDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

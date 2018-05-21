@@ -10,14 +10,13 @@
 namespace Homecare.Models.DataModels
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Route
+    public partial class sp_helpdiagrams_Result
     {
-        public int id_route { get; set; }
-        public int fk_caretaker_route { get; set; }
-        public System.DateTime date { get; set; }
-    
-        public virtual Caretaker Caretaker { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

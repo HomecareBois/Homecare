@@ -26,7 +26,7 @@ namespace Homecare.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (HomecareTestDB db = new HomecareTestDB())
+                using (HomecareDBEntities db = new HomecareDBEntities())
                 {
                     var userRights = new User_Rights
                     {

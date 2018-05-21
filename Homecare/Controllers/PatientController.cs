@@ -25,7 +25,7 @@ namespace Homecare.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (HomecareTestDB db = new HomecareTestDB())
+                using (HomecareDBEntities db = new HomecareDBEntities())
                 {
                     var c = new City
                     {
@@ -80,14 +80,14 @@ namespace Homecare.Controllers
 
         /*public ActionResult PatientList ()
         {
-            using (HomecareTestDB db = new HomecareTestDB())
+            using (HomecareDBEntities db = new HomecareDBEntities())
             {
                 return View(db.Patients.ToList());
             }
         }*/
         //public ActionResult PatientView()
         //{
-        //    using (HomecareTestDB db = new HomecareTestDB())
+        //    using (HomecareDBEntities db = new HomecareDBEntities())
         //    {
         //        return View(db.PatientViews.ToList());
         //    }
@@ -100,7 +100,7 @@ namespace Homecare.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            HomecareTestDB db = new HomecareTestDB();
+            HomecareDBEntities db = new HomecareDBEntities();
             Patient patient = db.Patients.Find(id);
             if (patient == null)
             {
@@ -133,7 +133,7 @@ namespace Homecare.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            HomecareTestDB db = new HomecareTestDB();
+            HomecareDBEntities db = new HomecareDBEntities();
             Patient patient = db.Patients.Find(id);
 
             if (patient == null)
@@ -167,7 +167,7 @@ namespace Homecare.Controllers
 
             if (ModelState.IsValid)
             {
-                HomecareTestDB db = new HomecareTestDB();
+                HomecareDBEntities db = new HomecareDBEntities();
 
                 Patient patient = db.Patients.Find(id);
 
@@ -201,7 +201,7 @@ namespace Homecare.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            HomecareTestDB db = new HomecareTestDB();
+            HomecareDBEntities db = new HomecareDBEntities();
             Patient patient = db.Patients.Find(id);
 
             if (patient == null)
@@ -231,7 +231,7 @@ namespace Homecare.Controllers
         [HttpPost, ActionName("DeletePatient")]
         public ActionResult DeletePatient (int id)
         {
-            HomecareTestDB db = new HomecareTestDB();
+            HomecareDBEntities db = new HomecareDBEntities();
 
             Patient patient = db.Patients.Find(id);
             Address address = db.Addresses.Find(patient.fk_address_patient);
