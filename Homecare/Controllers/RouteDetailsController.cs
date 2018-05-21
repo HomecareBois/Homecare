@@ -40,7 +40,7 @@ namespace Homecare.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             
-            using (HomecareDBEntities db = new HomecareDBEntities())
+            using (HomecareDBEntities db = new HomecareDBEntities()) 
             {
                 if(ModelState.IsValid)
                 {
