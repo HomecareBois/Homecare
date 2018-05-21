@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Homecare.Models;
 using Homecare.Models.DataModels;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Homecare.Controllers
 {
@@ -87,7 +89,21 @@ namespace Homecare.Controllers
 
             using (HomecareDBEntities db = new HomecareDBEntities())
             {
-                var userLogin = db.Logins.SingleOrDefault(x => x.username == model.Email && x.password == model.Password);
+
+                //Vi hasher password
+                SHA256 sha256 = SHA256Managed.Create();
+                byte[] bytes = Encoding.UTF8.GetBytes(model.Password);
+                byte[] hash = sha256.ComputeHash(bytes);
+
+                StringBuilder result = new StringBuilder();
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    result.Append(hash[i].ToString("X2"));
+                }
+                var pass = result.ToString();
+                //Vi er færdige med at hashe
+
+                var userLogin = db.Logins.SingleOrDefault(x => x.username == model.Email && x.password == pass);
 
                 if (userLogin != null)
                 {

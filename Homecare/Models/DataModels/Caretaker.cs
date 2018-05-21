@@ -11,9 +11,7 @@ namespace Homecare.Models.DataModels
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Caretaker
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +19,8 @@ namespace Homecare.Models.DataModels
         {
             this.Routes = new HashSet<Route>();
         }
-
+    
         public int id_caretaker { get; set; }
-        [DisplayName("Navn")]
-        [Required]
         public string caretaker_name { get; set; }
         public int fk_login_caretaker { get; set; }
         public Nullable<int> fk_phone_caretaker { get; set; }

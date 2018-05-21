@@ -274,6 +274,9 @@
     <Compile Include="Models\DataModels\User_Rights.cs">
       <DependentUpon>HomeareDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\Zipcode.cs">
+      <DependentUpon>HomeareDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\CaretakerViewModel.cs" />

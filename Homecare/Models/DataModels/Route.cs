@@ -22,7 +22,7 @@ namespace Homecare.Models.DataModels
     
         public int id_route { get; set; }
         public int fk_caretaker_route { get; set; }
-        public System.DateTime date { get; set; }
+        public string date { get; set; }
     
         public virtual Caretaker Caretaker { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

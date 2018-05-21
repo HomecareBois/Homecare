@@ -21,7 +21,7 @@ namespace Homecare.Controllers
                 RoutesListView route = new RoutesListView
                 {
                     Caretaker = item.Caretaker,
-                    date = item.date.ToString("dd-MM-yyyy")
+                    date = item.date//.ToString("dd-MM-yyyy")
                 };
                 routes.Add(route);
             }
