@@ -11,10 +11,8 @@ using Homecare.Models.ViewModels;
 
 namespace Homecare.Controllers
 {
-    //[Authorize]
     public class PatientController : Controller
     {
-        [Authorize]
         public ActionResult CreatePatient()
         {
             return View();
