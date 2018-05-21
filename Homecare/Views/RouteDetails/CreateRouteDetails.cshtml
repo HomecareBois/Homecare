@@ -1,4 +1,4 @@
-﻿@model Homecare.Models.DataModels.Route_Details
+﻿@model Homecare.Models.ViewModels.RouteDetailsViewModel
 
 @{
     ViewBag.Title = "CreateRouteDetails";
@@ -25,7 +25,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Patient, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.patientName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @{
                 Homecare.Models.DataModels.HomecareDBEntities db = new Homecare.Models.DataModels.HomecareDBEntities();
@@ -35,17 +35,10 @@
                     patients.Add(new SelectListItem { Text = item.patient_name, Value = item.patient_name });
                 }
             }
-            @Html.DropDownListFor(model => model.Patient, patients, "Vælg patient", new { @style = "padding: 7px;" })
-            @Html.ValidationMessageFor(model => model.Patient, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.patientName, patients, "Vælg patient", new { @style = "padding: 7px;" })
+            @Html.ValidationMessageFor(model => model.patientName, "", new { @class = "text-danger" })
         </div>
     </div>
-
-    @if (ViewBag.created != null)
-    {
-        <div class="col-md-offset-2 col-md-10 text-success">
-            @ViewBag.created
-        </div>
-    }
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

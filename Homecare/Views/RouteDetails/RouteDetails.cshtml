@@ -6,9 +6,6 @@
 
 <h2>RouteDetails</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -21,7 +18,7 @@
             @Html.DisplayNameFor(model => model.fk_route_route_details)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fk_address_route)
+            @Html.DisplayNameFor(model => model.Patient.patient_name)
         </th>
         <th></th>
     </tr>
@@ -38,7 +35,7 @@
             @Html.DisplayFor(modelItem => item.fk_route_route_details)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.fk_address_route)
+            @Html.DisplayFor(modelItem => item.Patient.patient_name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

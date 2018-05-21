@@ -1,6 +1,8 @@
 ﻿using Homecare.Models.DataModels;
+using Homecare.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -33,7 +35,7 @@ namespace Homecare.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateRouteDetails(int? id, Route_Details inputData)
+        public ActionResult CreateRouteDetails(int? id, RouteDetailsViewModel inputData)
         {
             if (id == null)
             {
@@ -42,19 +44,22 @@ namespace Homecare.Controllers
             
             using (HomecareDBEntities db = new HomecareDBEntities())
             {
+                
                 if(ModelState.IsValid)
                 {
+                    var patientId = db.Patients.FirstOrDefault(p => p.patient_name == inputData.patientName).id_patient;
                     Route_Details route = new Route_Details
                     {
-                        fk_patient_route_details = inputData.Patient.id_patient,
+                        fk_patient_route_details = patientId,
                         fk_route_route_details = (int)id,
                         arrival = inputData.arrival
                     };
+
                     db.Route_Details.Add(route);
                     db.SaveChanges();
                 }
                 ModelState.Clear();
-                ViewBag.created = "Besøg for " + inputData.Patient.patient_name.ToString() + " er oprettet";
+                //ViewBag.created = "Besøg for " + inputData.Patient.patient_name.ToString() + " er oprettet";
             }
 
             return View();
