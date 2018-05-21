@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Homecare.Models.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,8 @@ namespace Homecare.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            HomecareDBEntities db = new HomecareDBEntities();
+            return View(db.Routes.ToList());
         }
 
         public ActionResult About()
