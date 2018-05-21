@@ -350,6 +350,8 @@
     <Content Include="Views\Patient\PatientsList.cshtml" />
     <Content Include="Views\Route\RouteList.cshtml" />
     <Content Include="Views\Caretaker\CreateCaretaker.cshtml" />
+    <Content Include="Views\Account\LoginView.cshtml" />
+    <Content Include="Views\Account\LoginLandingPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
