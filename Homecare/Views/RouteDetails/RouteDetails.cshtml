@@ -1,11 +1,22 @@
 ﻿@model IEnumerable<Homecare.Models.DataModels.Route_Details>
 
 @{
-    ViewBag.Title = "RouteDetails";
+    ViewBag.Title = "Rutebeskrivelse";
+    //var s = ViewContext.RouteData.Values["id"];
+
+
+    Homecare.Models.DataModels.HomecareDBEntities db = new Homecare.Models.DataModels.HomecareDBEntities();
+    foreach(var item in db.Route_Details)
+    {
+
+    }
 }
 
-<h2>RouteDetails</h2>
+<h2>@*Rutebeskrivelse for @navn på datoen: @dato*@  </h2>
 
+<p>
+    @Html.ActionLink("Tilbage", "Index", "Routes")
+</p>
 <table class="table">
     <tr>
         <th>
@@ -32,8 +43,8 @@
             @Html.DisplayFor(modelItem => item.Patient.Address.road_name) @Html.DisplayFor(modelItem => item.Patient.Address.number), @Html.DisplayFor(modelItem => item.Patient.Address.City.zipcode) @Html.DisplayFor(modelItem => item.Patient.Address.City.city_name)
         </td>
         <td>
-            @Html.ActionLink("Ændr ankomst", "Edit", new {id=item.id_route_details}, null) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Ændr ankomst", "Edit", new {id=item.id_route_details}) |
+            @Html.ActionLink("Slet", "Delete", new { id=item.id_route_details })
         </td>
     </tr>
 }

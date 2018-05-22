@@ -1,0 +1,41 @@
+﻿@model Homecare.Models.DataModels.Route
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Er du sikker på at du vil slette denne rute?</h3>
+<div>
+    <h4>Route</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Caretaker.caretaker_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Caretaker.caretaker_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Slet" class="btn btn-default" /> |
+            @Html.ActionLink("Tilbage", "Index")
+        </div>
+    }
+</div>

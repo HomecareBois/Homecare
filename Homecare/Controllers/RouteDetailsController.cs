@@ -12,20 +12,20 @@ namespace Homecare.Controllers
 {
     public class RouteDetailsController : Controller
     {
-     
+
         public ActionResult RouteDetails(int? id)
         {
             List<Route_Details> routes = new List<Route_Details>();
             HomecareDBEntities db = new HomecareDBEntities();
-            
-                foreach (var item in db.Route_Details)
+
+            foreach (var item in db.Route_Details)
+            {
+                if (item.fk_route_route_details == id)
                 {
-                    if(item.fk_route_route_details == id)
-                    {
-                        routes.Add(item);
-                    }
+                    routes.Add(item);
                 }
-            
+            }
+
             return View(routes);
         }
 
@@ -41,11 +41,11 @@ namespace Homecare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             using (HomecareDBEntities db = new HomecareDBEntities())
             {
-                
-                if(ModelState.IsValid)
+
+                if (ModelState.IsValid)
                 {
                     var patientId = db.Patients.FirstOrDefault(p => p.patient_name == inputData.patientName).id_patient;
                     Route_Details route = new Route_Details
@@ -65,10 +65,10 @@ namespace Homecare.Controllers
             return View();
         }
 
-        
+
         public ActionResult Edit(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -91,18 +91,46 @@ namespace Homecare.Controllers
         {
             HomecareDBEntities db = new HomecareDBEntities();
 
-            
+
             Route_Details rd = db.Route_Details.Find(id);
 
             rd.arrival = routeDetails.arrival;
             db.SaveChanges();
 
-            return RedirectToAction("RouteDetails", new {id = rd.fk_route_route_details });
+            return RedirectToAction("RouteDetails", new { id = rd.fk_route_route_details });
         }
 
-        public ActionResult Delete(int? id, Route_Details reouteDetails)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            HomecareDBEntities db = new HomecareDBEntities();
+            Route_Details rd = new Route_Details();
+
+            rd = db.Route_Details.Find(id);
+
+            if (rd == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(rd);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            HomecareDBEntities db = new HomecareDBEntities();
+            Route_Details rd = new Route_Details();
+            rd = db.Route_Details.Find(id);
+
+            db.Route_Details.Remove(rd);
+            db.SaveChanges();
+
+            return RedirectToAction("RouteDetails");
         }
     }
 }
