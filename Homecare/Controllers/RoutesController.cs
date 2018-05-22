@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -15,6 +16,7 @@ namespace Homecare.Controllers
         public ActionResult Index()
         {
             HomecareDBEntities db = new HomecareDBEntities();
+           
             return View(db.Routes.ToList());
         }
 
@@ -49,6 +51,40 @@ namespace Homecare.Controllers
                 }
             }
             return Redirect("Index");
+        }
+
+        public ActionResult Delete(int? id)
+        {
+
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            HomecareDBEntities db = new HomecareDBEntities();
+
+            Route rou = new Route();
+            rou = db.Routes.Find(id);
+
+            if(rou == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(rou);
+        }
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            HomecareDBEntities db = new HomecareDBEntities();
+            Route rou = new Route();
+
+            rou = db.Routes.Find(id);
+
+            db.Routes.Remove(rou);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

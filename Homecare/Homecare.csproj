@@ -282,6 +282,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\CaretakerViewModel.cs" />
     <Compile Include="Models\ViewModels\PatientViewModel.cs" />
+    <Compile Include="Models\ViewModels\RouteDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\RoutesListView.cs" />
     <Compile Include="Models\ViewModels\RouteViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -381,6 +382,9 @@
     <Content Include="Views\Caretaker\Index.cshtml" />
     <Content Include="Views\Caretaker\EditCaretaker.cshtml" />
     <Content Include="Views\Caretaker\DeleteCaretaker.cshtml" />
+    <Content Include="Views\RouteDetails\Edit.cshtml" />
+    <Content Include="Views\RouteDetails\Delete.cshtml" />
+    <Content Include="Views\Routes\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

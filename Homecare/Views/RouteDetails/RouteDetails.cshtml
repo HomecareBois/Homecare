@@ -1,27 +1,32 @@
 ﻿@model IEnumerable<Homecare.Models.DataModels.Route_Details>
 
 @{
-    ViewBag.Title = "RouteDetails";
+    ViewBag.Title = "Rutebeskrivelse";
+    //var s = ViewContext.RouteData.Values["id"];
+
+
+    Homecare.Models.DataModels.HomecareDBEntities db = new Homecare.Models.DataModels.HomecareDBEntities();
+    foreach(var item in db.Route_Details)
+    {
+
+    }
 }
 
-<h2>RouteDetails</h2>
+<h2>@*Rutebeskrivelse for @navn på datoen: @dato*@  </h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Tilbage", "Index", "Routes")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.id_route_details)
+            @Html.DisplayNameFor(model => model.Patient.patient_name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.arrival)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fk_route_route_details)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fk_address_route)
+            @Html.DisplayNameFor(model => model.Patient.Address)
         </th>
         <th></th>
     </tr>
@@ -29,21 +34,17 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.id_route_details)
+            @Html.DisplayFor(modelItem => item.Patient.patient_name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.arrival)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.fk_route_route_details)
+            @Html.DisplayFor(modelItem => item.Patient.Address.road_name) @Html.DisplayFor(modelItem => item.Patient.Address.number), @Html.DisplayFor(modelItem => item.Patient.Address.City.zipcode) @Html.DisplayFor(modelItem => item.Patient.Address.City.city_name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.fk_address_route)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Ændr ankomst", "Edit", new {id=item.id_route_details}) |
+            @Html.ActionLink("Slet", "Delete", new { id=item.id_route_details })
         </td>
     </tr>
 }
