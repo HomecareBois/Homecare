@@ -16,6 +16,7 @@ namespace Homecare.Models.ViewModels
         [Required(ErrorMessage = "Udfyld CPR-nummer")]
         [DisplayName("CPR")]
         [Range(100000000, 9999999999, ErrorMessage = "CPR-nummer skal være ti cifre")]
+        [RegularExpressionAttribute("^[0-9]*$", ErrorMessage = "Må kun indeholde tal")]
         public string cpr { get; set; }
 
         [Required(ErrorMessage = "Udfyld gadenavn")]

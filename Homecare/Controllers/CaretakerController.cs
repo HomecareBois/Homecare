@@ -47,7 +47,9 @@ namespace Homecare.Controllers
                         user_rights_type = inputData.user_rights
                     };
 
-                    var userRightsID = db.User_Rights.FirstOrDefault(ur => ur.user_rights_type == inputData.user_rights).id_user_rights;
+                    var userRightsID = db.User_Rights
+                        .FirstOrDefault(ur => ur.user_rights_type == inputData.user_rights)
+                        .id_user_rights;
 
                     //vi hasher password
                     SHA256 sha256 = SHA256Managed.Create();

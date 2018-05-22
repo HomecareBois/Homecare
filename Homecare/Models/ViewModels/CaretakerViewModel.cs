@@ -36,6 +36,8 @@ namespace Homecare.Models.ViewModels
         
         [Display(Name = "Telefonnummer")]
         [Required]
+        [RegularExpressionAttribute("^[0-9]*$", ErrorMessage = "Må kun indeholde tal")]
+        [StringLength(8, MinimumLength = 8, ErrorMessage = "Skal være 8 cifre")]
         public string phonenumber { get; set; }
     }
 }
