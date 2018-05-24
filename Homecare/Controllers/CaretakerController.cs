@@ -149,8 +149,21 @@ namespace Homecare.Controllers
                 Phone phone = db.Phones.Find(caretaker.fk_phone_caretaker);
                 User_Rights user_rights = db.User_Rights.Find(login.fk_user_rights_login);
 
+                //vi hasher password
+                SHA256 sha256 = SHA256Managed.Create();
+                byte[] bytes = Encoding.UTF8.GetBytes(cvm.password);
+                byte[] hash = sha256.ComputeHash(bytes);
+
+                StringBuilder result = new StringBuilder();
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    result.Append(hash[i].ToString("X2"));
+                }
+                var pass = result.ToString();
+                //Vi er færdige med at hashe
+
                 login.username = cvm.username;
-                login.password = cvm.password;
+                login.password = pass;
                 phone.phone_number = cvm.phonenumber;
                 user_rights.user_rights_type = cvm.user_rights;
 
