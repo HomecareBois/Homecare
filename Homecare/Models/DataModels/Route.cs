@@ -11,7 +11,9 @@ namespace Homecare.Models.DataModels
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Route
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +24,10 @@ namespace Homecare.Models.DataModels
     
         public int id_route { get; set; }
         public int fk_caretaker_route { get; set; }
+        [Required(ErrorMessage = "Du skal skrive en dato")]
+        [DisplayName("Dato")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public string date { get; set; }
     
         public virtual Caretaker Caretaker { get; set; }

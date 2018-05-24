@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="HomecareDBModel.Patient" Width="1.5" PointX="7.5" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HomecareDBModel.Phone" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HomecareDBModel.Route" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="HomecareDBModel.Route_Details" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HomecareDBModel.Schedule" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HomecareDBModel.Staff" Width="1.5" PointX="8" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HomecareDBModel.sysdiagram" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
@@ -32,9 +31,10 @@
         <AssociationConnector Association="HomecareDBModel.FK_Login_User_Rights" ManuallyRouted="false" />
         <AssociationConnector Association="HomecareDBModel.FK_Staff_Occupation" ManuallyRouted="false" />
         <AssociationConnector Association="HomecareDBModel.FK_Patient_Phone" ManuallyRouted="false" />
-        <AssociationConnector Association="HomecareDBModel.FK_Route_Details_Patient" ManuallyRouted="false" />
-        <AssociationConnector Association="HomecareDBModel.FK_Route_Details_Route" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="HomecareDBModel.Route_Details" Width="1.5" PointX="13.75" PointY="4.375" />
+        <AssociationConnector Association="HomecareDBModel.FK_Route_Details_Patient" />
+        <AssociationConnector Association="HomecareDBModel.FK_Route_Details_Route" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

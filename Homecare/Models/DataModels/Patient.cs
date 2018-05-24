@@ -11,7 +11,9 @@ namespace Homecare.Models.DataModels
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Patient
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +23,8 @@ namespace Homecare.Models.DataModels
         }
     
         public int id_patient { get; set; }
+        [Required(ErrorMessage = "Vælg en patient")]
+        [DisplayName("Patient")]
         public string patient_name { get; set; }
         public string cpr { get; set; }
         public string relative_phonenumber { get; set; }

@@ -2,17 +2,8 @@
 
 @{
     ViewBag.Title = "Rutebeskrivelse";
-    //var s = ViewContext.RouteData.Values["id"];
-
-
-    Homecare.Models.DataModels.HomecareDBEntities db = new Homecare.Models.DataModels.HomecareDBEntities();
-    foreach(var item in db.Route_Details)
-    {
-
-    }
 }
 
-<h2>@*Rutebeskrivelse for @navn på datoen: @dato*@  </h2>
 
 <p>
     @Html.ActionLink("Tilbage", "Index", "Routes")
