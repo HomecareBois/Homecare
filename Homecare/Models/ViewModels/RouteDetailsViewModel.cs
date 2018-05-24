@@ -10,9 +10,7 @@ namespace Homecare.Models.ViewModels
     public class RouteDetailsViewModel
     {
         [Required(ErrorMessage = "Du skal skrive et tidspunkt")]
-        [DisplayName("Tid")]
-        [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm")]
+        [DisplayName("Ankomst")]
         public string arrival { get; set; }
         [Required(ErrorMessage = "Vælg patient")]
         [DisplayName("Patient")]

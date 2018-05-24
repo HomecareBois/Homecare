@@ -23,7 +23,7 @@ namespace Homecare.Models.DataModels
         }
     
         public int id_caretaker { get; set; }
-        [Required(ErrorMessage = "Du skal vælge en hjemmehjælper")]
+        [Required(ErrorMessage = "Vælg hjemmehjælper")]
         [DisplayName("Hjemmehjælper")]
         public string caretaker_name { get; set; }
         public int fk_login_caretaker { get; set; }

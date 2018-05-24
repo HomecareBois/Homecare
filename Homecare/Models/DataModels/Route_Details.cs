@@ -17,10 +17,8 @@ namespace Homecare.Models.DataModels
     public partial class Route_Details
     {
         public int id_route_details { get; set; }
-        [Required(ErrorMessage = "Du skal skrive et tidspunkt")]
-        [DisplayName("Tid")]
-        [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm")]
+        [Required(ErrorMessage = "Vælg tidspunkt for besøg")]
+        [DisplayName("Ankomst")]
         public string arrival { get; set; }
         public int fk_route_route_details { get; set; }
         public int fk_patient_route_details { get; set; }

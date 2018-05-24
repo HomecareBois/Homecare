@@ -78,7 +78,7 @@
             <PropertyRef Name="id_route_details" />
           </Key>
           <Property Name="id_route_details" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="arrival" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="arrival" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="fk_route_route_details" Type="int" Nullable="false" />
           <Property Name="fk_patient_route_details" Type="int" Nullable="false" />
         </EntityType>
@@ -868,7 +868,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             <End Role="Route" EntitySet="Routes" />
             <End Role="Route_Details" EntitySet="Route_Details" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -885,7 +885,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             <PropertyRef Name="id_route_details" />
           </Key>
           <Property Name="id_route_details" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="arrival" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="arrival" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="fk_route_route_details" Type="Int32" Nullable="false" />
           <Property Name="fk_patient_route_details" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Patient" Relationship="HomecareDBModel.FK_Route_Details_Patient" FromRole="Route_Details" ToRole="Patient" />
@@ -915,7 +915,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

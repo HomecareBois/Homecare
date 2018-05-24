@@ -23,8 +23,8 @@ namespace Homecare.Models.DataModels
         }
     
         public int id_patient { get; set; }
-        [Required(ErrorMessage = "Vælg en patient")]
-        [DisplayName("Patient")]
+        [Required(ErrorMessage = "Vælg patient")]
+        [DisplayName("Navn")]
         public string patient_name { get; set; }
         public string cpr { get; set; }
         public string relative_phonenumber { get; set; }
