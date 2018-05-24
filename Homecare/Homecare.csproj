@@ -317,6 +317,7 @@
     <Content Include="Models\DataModels\HomecareDB.edmx.diagram">
       <DependentUpon>HomecareDB.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\HomecareAppTest - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

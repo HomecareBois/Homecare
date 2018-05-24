@@ -37,10 +37,12 @@ namespace Homecare.Models.ViewModels
 
         [Required(ErrorMessage = "Udfyld telefonnummer til patient")]
         [DisplayName("Telefonnummer (Patient)")]
+        [Range(10000000, 99999999, ErrorMessage = "Telefonnummer skal være på otte cifre")]
         public string phonenumber { get; set; }
 
         [Required(ErrorMessage = "Udfyld telefonnummer til pårørende")]
         [DisplayName("Telefonnummer (Pårørende)")]
+        [Range(10000000, 99999999, ErrorMessage = "Telefonnummer skal være på otte cifre")]
         public string relativePhonenumber { get; set; }
     }
 }
