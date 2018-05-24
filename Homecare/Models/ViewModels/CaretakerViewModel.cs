@@ -36,6 +36,7 @@ namespace Homecare.Models.ViewModels
         
         [Display(Name = "Telefonnummer")]
         [Required]
+        [Range(10000000, 99999999, ErrorMessage = "Telefonnummer skal være på otte cifre")]
         public string phonenumber { get; set; }
     }
 }

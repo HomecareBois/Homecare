@@ -55,6 +55,7 @@
                 userRights.Add(new SelectListItem { Text = "Bruger", Value = "Bruger" });
             }
             @Html.DropDownListFor(model => model.user_rights, userRights, "Vælg brugertype", new { @style = "padding: 7px;" })
+            <br/>
             @Html.ValidationMessageFor(model => model.user_rights, "", new { @class = "text-danger" })
         </div>
     </div>
