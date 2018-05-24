@@ -31,16 +31,13 @@ namespace Homecare.Controllers
         [HttpPost]
         public ActionResult CreateCaretaker(CaretakerViewModel inputData)
         {
-            Phone phonenumberMatch;
-
             if (ModelState.IsValid)
             {
                 using (HomecareDBEntities db = new HomecareDBEntities())
                 {
-                    phonenumberMatch = db.Phones
+                    Phone phonenumberMatch = db.Phones
                         .Where(p => p.phone_number == inputData.phonenumber)
                         .FirstOrDefault();
-
 
                     var userRights = new User_Rights
                     {

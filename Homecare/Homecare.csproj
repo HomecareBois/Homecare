@@ -382,6 +382,9 @@
     <Content Include="Views\Caretaker\Index.cshtml" />
     <Content Include="Views\Caretaker\EditCaretaker.cshtml" />
     <Content Include="Views\Caretaker\DeleteCaretaker.cshtml" />
+    <Content Include="Views\RouteDetails\Edit.cshtml" />
+    <Content Include="Views\RouteDetails\Delete.cshtml" />
+    <Content Include="Views\Routes\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

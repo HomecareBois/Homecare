@@ -59,7 +59,7 @@
                         @Html.DisplayFor(modelItem => item.date)
                     </td>
                     <td>
-                        @Html.ActionLink("Se rute", "RouteDetails", "RouteDetails", new { id = item.id_route }, null)
+                        @Html.ActionLink("Se rute", "Index", "Routes", new { id = item.id_route }, null)
                     </td>
                 </tr>
             }

@@ -68,6 +68,10 @@
             display: flex;
             justify-content: space-between;
         }
+
+        hr {
+            background: #009688;
+        }
     </style>
 
 </head>
@@ -84,10 +88,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Forside", "Index", "Home")</li>
                     <li>@Html.ActionLink("Hjemmehjælpere", "Index", "Caretaker")</li>
                     <li>@Html.ActionLink("Patienter", "PatientView", "Patient")</li>
-                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Ruter", "Index", "Routes")</li>
                 </ul>
             </div>
                 @Html.Partial("_LoginPartial")

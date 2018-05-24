@@ -11,12 +11,19 @@ namespace Homecare.Models.DataModels
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CaretakerView
     {
+        [DisplayName("Fulde navn")]
         public string caretaker_name { get; set; }
         public int id_caretaker { get; set; }
+
+        [DisplayName("Telefon")]
         public string phone_number { get; set; }
+
+        [DisplayName("Brugernavn")]
         public string username { get; set; }
     }
 }

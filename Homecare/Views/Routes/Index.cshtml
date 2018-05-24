@@ -9,14 +9,6 @@
 <p>
     @Html.ActionLink("Opret ny", "CreateRoute")
 </p>
-
-<h1>
-    (punkt er patient(m adresse))
-    Tilføj view til "tilføj punkter" så man kan tilføje adresse og tidspunkt
-    Details skal vise alle routes for den hjemmehjælper.
-    Delete skal slette den route + alle tilhørende "punkter"
-</h1>
-
 <table class="table">
     <tr>
         <th>
@@ -40,7 +32,7 @@
             <td>
                 @Html.ActionLink("Tilføj punkter", "CreateRouteDetails", "RouteDetails", new { id=item.id_route }, null) |
                 @Html.ActionLink("Se rute", "RouteDetails", "RouteDetails", new { id=item.id_route }, null) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Delete", "Delete", new { id=item.id_route})
             </td>
         </tr>
     }
