@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HomecareDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HomecareDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="id_address" />
@@ -78,7 +78,7 @@
             <PropertyRef Name="id_route_details" />
           </Key>
           <Property Name="id_route_details" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="arrival" Type="time" Precision="0" Nullable="false" />
+          <Property Name="arrival" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="fk_route_route_details" Type="int" Nullable="false" />
           <Property Name="fk_patient_route_details" Type="int" Nullable="false" />
         </EntityType>
@@ -465,8 +465,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HomecareDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -535,7 +534,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <Property Name="fk_phone_patient" Type="Int32" />
           <NavigationProperty Name="Address" Relationship="Self.FK_Patient_Address" FromRole="Patient" ToRole="Address" />
           <NavigationProperty Name="Phone" Relationship="Self.FK_Patient_Phone" FromRole="Patient" ToRole="Phone" />
-          <NavigationProperty Name="Route_Details" Relationship="Self.FK_Route_Details_Patient" FromRole="Patient" ToRole="Route_Details" />
+          <NavigationProperty Name="Route_Details" Relationship="HomecareDBModel.FK_Route_Details_Patient" FromRole="Patient" ToRole="Route_Details" />
         </EntityType>
         <EntityType Name="Phone">
           <Key>
@@ -554,18 +553,7 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <Property Name="fk_caretaker_route" Type="Int32" Nullable="false" />
           <Property Name="date" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Caretaker" Relationship="Self.FK_Route_Caretaker" FromRole="Route" ToRole="Caretaker" />
-          <NavigationProperty Name="Route_Details" Relationship="Self.FK_Route_Details_Route" FromRole="Route" ToRole="Route_Details" />
-        </EntityType>
-        <EntityType Name="Route_Details">
-          <Key>
-            <PropertyRef Name="id_route_details" />
-          </Key>
-          <Property Name="id_route_details" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="arrival" Type="Time" Nullable="false" Precision="0" />
-          <Property Name="fk_route_route_details" Type="Int32" Nullable="false" />
-          <Property Name="fk_patient_route_details" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Patient" Relationship="Self.FK_Route_Details_Patient" FromRole="Route_Details" ToRole="Patient" />
-          <NavigationProperty Name="Route" Relationship="Self.FK_Route_Details_Route" FromRole="Route_Details" ToRole="Route" />
+          <NavigationProperty Name="Route_Details" Relationship="HomecareDBModel.FK_Route_Details_Route" FromRole="Route" ToRole="Route_Details" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
@@ -787,30 +775,6 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Route_Details_Patient">
-          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
-          <End Role="Route_Details" Type="Self.Route_Details" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Patient">
-              <PropertyRef Name="id_patient" />
-            </Principal>
-            <Dependent Role="Route_Details">
-              <PropertyRef Name="fk_patient_route_details" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Route_Details_Route">
-          <End Role="Route" Type="Self.Route" Multiplicity="1" />
-          <End Role="Route_Details" Type="Self.Route_Details" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Route">
-              <PropertyRef Name="id_route" />
-            </Principal>
-            <Dependent Role="Route_Details">
-              <PropertyRef Name="fk_route_route_details" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="HomecareDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="Caretakers" EntityType="Self.Caretaker" />
@@ -820,7 +784,6 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <EntitySet Name="Patients" EntityType="Self.Patient" />
           <EntitySet Name="Phones" EntityType="Self.Phone" />
           <EntitySet Name="Routes" EntityType="Self.Route" />
-          <EntitySet Name="Route_Details" EntityType="Self.Route_Details" />
           <EntitySet Name="Schedules" EntityType="Self.Schedule" />
           <EntitySet Name="Staffs" EntityType="Self.Staff" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
@@ -866,14 +829,6 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             <End Role="Phone" EntitySet="Phones" />
             <End Role="Patient" EntitySet="Patients" />
           </AssociationSet>
-          <AssociationSet Name="FK_Route_Details_Patient" Association="Self.FK_Route_Details_Patient">
-            <End Role="Patient" EntitySet="Patients" />
-            <End Role="Route_Details" EntitySet="Route_Details" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Route_Details_Route" Association="Self.FK_Route_Details_Route">
-            <End Role="Route" EntitySet="Routes" />
-            <End Role="Route_Details" EntitySet="Route_Details" />
-          </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -904,6 +859,15 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Route_Details" EntityType="HomecareDBModel.Route_Details" />
+          <AssociationSet Name="FK_Route_Details_Patient" Association="HomecareDBModel.FK_Route_Details_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Route_Details" EntitySet="Route_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_Details_Route" Association="HomecareDBModel.FK_Route_Details_Route">
+            <End Role="Route" EntitySet="Routes" />
+            <End Role="Route_Details" EntitySet="Route_Details" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -916,6 +880,41 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Route_Details">
+          <Key>
+            <PropertyRef Name="id_route_details" />
+          </Key>
+          <Property Name="id_route_details" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="arrival" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="fk_route_route_details" Type="Int32" Nullable="false" />
+          <Property Name="fk_patient_route_details" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="HomecareDBModel.FK_Route_Details_Patient" FromRole="Route_Details" ToRole="Patient" />
+          <NavigationProperty Name="Route" Relationship="HomecareDBModel.FK_Route_Details_Route" FromRole="Route_Details" ToRole="Route" />
+        </EntityType>
+        <Association Name="FK_Route_Details_Patient">
+          <End Type="HomecareDBModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="HomecareDBModel.Route_Details" Role="Route_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="id_patient" />
+            </Principal>
+            <Dependent Role="Route_Details">
+              <PropertyRef Name="fk_patient_route_details" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_Details_Route">
+          <End Type="HomecareDBModel.Route" Role="Route" Multiplicity="1" />
+          <End Type="HomecareDBModel.Route_Details" Role="Route_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="id_route" />
+            </Principal>
+            <Dependent Role="Route_Details">
+              <PropertyRef Name="fk_route_route_details" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -995,16 +994,6 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
                 <ScalarProperty Name="id_route" ColumnName="id_route" />
                 <ScalarProperty Name="fk_caretaker_route" ColumnName="fk_caretaker_route" />
                 <ScalarProperty Name="date" ColumnName="date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Route_Details">
-            <EntityTypeMapping TypeName="HomecareDBModel.Route_Details">
-              <MappingFragment StoreEntitySet="Route_Details">
-                <ScalarProperty Name="id_route_details" ColumnName="id_route_details" />
-                <ScalarProperty Name="arrival" ColumnName="arrival" />
-                <ScalarProperty Name="fk_route_route_details" ColumnName="fk_route_route_details" />
-                <ScalarProperty Name="fk_patient_route_details" ColumnName="fk_patient_route_details" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1130,6 +1119,16 @@ warning 6002: The table/view 'HomecareDB.sys.database_firewall_rules' does not h
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="HomecareDBModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="HomecareDBModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Route_Details">
+            <EntityTypeMapping TypeName="HomecareDBModel.Route_Details">
+              <MappingFragment StoreEntitySet="Route_Details">
+                <ScalarProperty Name="fk_patient_route_details" ColumnName="fk_patient_route_details" />
+                <ScalarProperty Name="fk_route_route_details" ColumnName="fk_route_route_details" />
+                <ScalarProperty Name="arrival" ColumnName="arrival" />
+                <ScalarProperty Name="id_route_details" ColumnName="id_route_details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -35,7 +35,6 @@ namespace Homecare.Models.DataModels
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<Phone> Phones { get; set; }
         public virtual DbSet<Route> Routes { get; set; }
-        public virtual DbSet<Route_Details> Route_Details { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
@@ -45,6 +44,7 @@ namespace Homecare.Models.DataModels
         public virtual DbSet<PatientView> PatientViews { get; set; }
         public virtual DbSet<RouteView> RouteViews { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
+        public virtual DbSet<Route_Details> Route_Details { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
