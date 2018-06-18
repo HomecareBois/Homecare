@@ -15,6 +15,11 @@ namespace Homecare.Controllers
     {
         public ActionResult Index()
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             HomecareDBEntities db = new HomecareDBEntities();
            
             return View(db.Routes.ToList());
@@ -22,13 +27,23 @@ namespace Homecare.Controllers
 
         public ActionResult CreateRoute()
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult CreateRoute(Route inputData)
         {
-            if(ModelState.IsValid)
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            if (ModelState.IsValid)
             {
                 using (HomecareDBEntities db = new HomecareDBEntities())
                 { 
@@ -55,8 +70,12 @@ namespace Homecare.Controllers
 
         public ActionResult Delete(int? id)
         {
-
-            if(id == null)
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -76,6 +95,11 @@ namespace Homecare.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             HomecareDBEntities db = new HomecareDBEntities();
             Route rou = new Route();
 

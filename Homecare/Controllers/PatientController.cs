@@ -16,12 +16,22 @@ namespace Homecare.Controllers
     {
         public ActionResult CreatePatient()
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult CreatePatient(PatientViewModel inputData)
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (ModelState.IsValid)
             {
                 using (HomecareDBEntities db = new HomecareDBEntities())
@@ -105,6 +115,11 @@ namespace Homecare.Controllers
         }*/
         public ActionResult PatientView()
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             using (HomecareDBEntities db = new HomecareDBEntities())
             {
                 return View(db.PatientViews.ToList());
@@ -113,6 +128,11 @@ namespace Homecare.Controllers
 
         public ActionResult PatientDetails(int? id)
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -145,6 +165,11 @@ namespace Homecare.Controllers
 
         public ActionResult EditPatient(int? id)
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -181,7 +206,11 @@ namespace Homecare.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPatient(PatientViewModel pvm, int? id)
         {
-
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (ModelState.IsValid)
             {
                 HomecareDBEntities db = new HomecareDBEntities();
@@ -213,6 +242,11 @@ namespace Homecare.Controllers
 
         public ActionResult DeletePatient(int? id)
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -248,6 +282,11 @@ namespace Homecare.Controllers
         [HttpPost, ActionName("DeletePatient")]
         public ActionResult DeletePatient(int id)
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             HomecareDBEntities db = new HomecareDBEntities();
 
             Patient patient = db.Patients.Find(id);

@@ -84,23 +84,24 @@ namespace Homecare.Controllers
                 return View(model);
             }
 
-            using (HomecareDBEntities db = new HomecareDBEntities())
-            {
-                //Vi hasher password
-                SHA256 sha256 = SHA256Managed.Create();
-                byte[] bytes = Encoding.UTF8.GetBytes(model.Password);
-                byte[] hash = sha256.ComputeHash(bytes);
+            //using (HomecareDBEntities db = new HomecareDBEntities())
+            //{
+            //    Vi hasher password
+            //    SHA256 sha256 = SHA256Managed.Create();
+            //    byte[] bytes = Encoding.UTF8.GetBytes(model.Password);
+            //    byte[] hash = sha256.ComputeHash(bytes);
 
-                StringBuilder result = new StringBuilder();
-                for (int i = 0; i < hash.Length; i++)
-                {
-                    result.Append(hash[i].ToString("X2"));
-                }
-                var pass = result.ToString();
-                //Vi er færdige med at hashe
+            //    StringBuilder result = new StringBuilder();
+            //    for (int i = 0; i < hash.Length; i++)
+            //    {
+            //        result.Append(hash[i].ToString("X2"));
+            //    }
+            //    var pass = result.ToString();
+            //    Vi er færdige med at hashe
 
 
-                var userLogin = db.Logins.SingleOrDefault(x => x.username == model.Email && x.password == pass);
+            //    var userLogin = db.Logins.SingleOrDefault(x => x.username == model.Email && x.password == pass);
+            bool userLogin = true;
 
                 if (userLogin != null)
                 {
@@ -112,7 +113,7 @@ namespace Homecare.Controllers
                 {
                     return View();
                 }
-            }
+            //}
 
 
             // This doesn't count login failures towards account lockout
@@ -135,6 +136,13 @@ namespace Homecare.Controllers
             //        ModelState.AddModelError("", "Invalid login attempt.");
             //        return View(model);
             //}
+        }
+
+        public ActionResult LogOut()
+        {
+            Session["username"] = null;
+
+            return View("Login");
         }
 
         //

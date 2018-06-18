@@ -15,6 +15,11 @@ namespace Homecare.Controllers
 
         public ActionResult RouteDetails(int? id)
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             List<Route_Details> routes = new List<Route_Details>();
             HomecareDBEntities db = new HomecareDBEntities();
 
@@ -31,12 +36,22 @@ namespace Homecare.Controllers
 
         public ActionResult CreateRouteDetails()
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult CreateRouteDetails(int? id, RouteDetailsViewModel inputData)
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -68,6 +83,11 @@ namespace Homecare.Controllers
 
         public ActionResult Edit(int? id)
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -89,6 +109,11 @@ namespace Homecare.Controllers
         [HttpPost]
         public ActionResult Edit(int? id, Route_Details routeDetails)
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             HomecareDBEntities db = new HomecareDBEntities();
 
 
@@ -102,6 +127,11 @@ namespace Homecare.Controllers
 
         public ActionResult Delete(int? id)
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -123,6 +153,11 @@ namespace Homecare.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
+            var username = Session["username"] as string;
+            if (username == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             HomecareDBEntities db = new HomecareDBEntities();
             Route_Details rd = new Route_Details();
             rd = db.Route_Details.Find(id);
