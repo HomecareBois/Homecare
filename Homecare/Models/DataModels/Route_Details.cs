@@ -16,7 +16,6 @@ namespace Homecare.Models.DataModels
     public partial class Route_Details
     {
         public int id_route_details { get; set; }
-        [Required]
         public System.TimeSpan arrival { get; set; }
         public int fk_route_route_details { get; set; }
         public int fk_patient_route_details { get; set; }
