@@ -23,7 +23,7 @@ namespace Homecare.Models.DataModels
         [DisplayName("Telefon")]
         public string phone_number { get; set; }
 
-        [DisplayName("Brugernavn")]
+        [DisplayName("Mail")]
         public string username { get; set; }
     }
 }

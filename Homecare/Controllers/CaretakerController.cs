@@ -54,6 +54,12 @@ namespace Homecare.Controllers
                         .Where(p => p.phone_number == inputData.phonenumber)
                         .FirstOrDefault();
 
+                    if (phonenumberMatch != null)
+                    {
+                        ViewBag.error = "Telefonnummer eksisterer allerede";
+                        return View();
+                    }
+
                     var userRights = new User_Rights
                     {
                         user_rights_type = inputData.user_rights
@@ -103,16 +109,11 @@ namespace Homecare.Controllers
                         fk_phone_caretaker = phoneID
                     };
 
-                    if (phonenumberMatch != null)
-                    {
-                        ViewBag.PhoneMessage = "Telefonnummer eksisterer allerede";
-                    } else
-                    {
-                        db.Caretakers.Add(caretaker);
-                        db.SaveChanges();
-                        ViewBag.LoginMessage = inputData.name + " blev oprettet";
-                        ModelState.Clear();
-                    }
+                db.Caretakers.Add(caretaker);
+                db.SaveChanges();
+                ViewBag.LoginMessage = inputData.name + " blev oprettet";
+                ModelState.Clear();
+
                 }
             }
             return View();
